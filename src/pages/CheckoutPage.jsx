@@ -4,7 +4,7 @@ import CardImage from "../assets/card-image-test.png";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useState } from "react";
-import logoBCA from "../assets/logo-BCA.png";
+import logoBCA from "../assets/logo-acb.png";
 
 export default function CheckoutPage() {
   const { product_id } = useParams();
