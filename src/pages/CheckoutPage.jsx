@@ -4,7 +4,7 @@ import CardImage from "../assets/card-image-test.png";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useState } from "react";
-import logoBCA from "../assets/logo-acb.png";
+import logoACB from "../assets/Logo-acb.png";
 
 export default function CheckoutPage() {
   const { product_id } = useParams();
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
 
                   <div className=" flex gap-2 items-center pt-10">
                     <div className=" w-32">
-                      <img src={logoBCA} alt="bca-logo" />
+                      <img src={logoACB} alt="acb-logo" />
                     </div>
                     <div>
                       <div className=" font-semibold flex items-center gap-2">
