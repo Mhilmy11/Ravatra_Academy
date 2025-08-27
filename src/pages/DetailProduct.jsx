@@ -27,7 +27,7 @@ export default function DetailProduct() {
 
   useEffect(() => {
     axios
-      .get(`http://ravatraacademy.id/api/index.php?route=products&id=${id}`)
+      .get(`https://ravatraacademy.id/api/index.php?route=products&id=${id}`)
       .then((res) => {
         if (res.data.success) setDetailProduct(res.data.data);
       })
