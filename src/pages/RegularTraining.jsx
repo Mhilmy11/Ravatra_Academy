@@ -8,6 +8,7 @@ import AboutImage from "../assets/image-about.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Container from "../components/Container";
 
 export default function RegularTraining() {
   const [products, setProducts] = useState([]);
@@ -36,7 +37,7 @@ export default function RegularTraining() {
       });
   }, []);
   return (
-    <>
+    <Container>
       <div className=" md:px-20 px-5 w-full">
         <div className=" w-full md:flex md:justify-between md:items-center">
           <div className=" md:w-1/2">
@@ -128,9 +129,9 @@ export default function RegularTraining() {
                   </div>
 
                   <div className=" px-1 mt-3.5">
-                    <h1 className=" font-semibold text-2xl">
+                    {/* <h1 className=" font-semibold text-2xl">
                       {product.product_name}
-                    </h1>
+                    </h1> */}
 
                     <div className=" grid grid-cols-2 gap-y-3.5 text-xs my-3.5">
                       <div className=" flex items-center gap-1">
@@ -164,18 +165,20 @@ export default function RegularTraining() {
                       </div>
                     </div>
 
-                    <div className=" pb-2 md:text-base text-sm">
+                    <div className=" pb-2 md:text-base text-xs">
                       <p className=" font-semibold">Advicer/Pembicara :</p>
-                      <p className=" text-gray-500 text-sm">
+                      <p className=" text-gray-500 text-xs">
                         {product.pembicara}
                       </p>
                     </div>
 
                     <div className=" h-0.5 bg-gray-300 rounded-full"></div>
 
-                    <p className=" font-bold text-2xl my-3.5 flex items-end">
-                      {formatRupiah(product.product_price)}/{" "}
-                      <p className=" text-sm font-light"> Peserta</p>
+                    <p className=" font-bold text-[22px] my-3.5 flex items-center gap-1.5">
+                      <p>{formatRupiah(product.product_price)}</p>
+                      <p className=" text-sm font-light line-through">
+                        {product.dummy_discount}
+                      </p>
                     </p>
 
                     <button
@@ -200,6 +203,6 @@ export default function RegularTraining() {
           </button>
         </div>
       </div>
-    </>
+    </Container>
   );
 }
