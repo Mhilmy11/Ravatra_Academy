@@ -14,6 +14,7 @@ export default function CheckoutPage() {
     first_name: "",
     last_name: "",
     email: "",
+    company: "",
     phone: "",
   });
 
@@ -157,6 +158,20 @@ export default function CheckoutPage() {
                     className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block mb-1 text-sm font-medium">
+                  Asal Perusahaan
+                </label>
+                <input
+                  required
+                  disabled={canPay}
+                  name="company"
+                  onChange={handleChange}
+                  placeholder="Nama Perusahaan Anda..."
+                  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </div>
 
               <div>
