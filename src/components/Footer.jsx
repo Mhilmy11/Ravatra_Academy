@@ -14,7 +14,7 @@ export default function Footer() {
   const page = [
     { label: "Beranda", path: "/" },
     { label: "Regular Training", path: "/regulartraining" },
-    { label: "In-House Training", path: "/inhousetraining" },
+    // { label: "In-House Training", path: "/inhousetraining" },
     { label: "Seminar", path: "/seminar" },
     // { label: "Kursus", path: "/kursus" },
   ];

@@ -124,18 +124,18 @@ export default function DetailProduct() {
 
               <p className=" font-semibold">Hubungi Sales kami :</p>
               <button
-                onClick={() => openLink("https://wa.me/628121427783")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
-              >
-                <BsWhatsapp color="green" size={25} />
-                <p>Sales Novia</p>
-              </button>
-              <button
                 onClick={() => openLink("https://wa.me/6281214277859")}
                 className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
               >
                 <BsWhatsapp color="green" size={25} />
                 <p>Sales Sofi</p>
+              </button>
+              <button
+                onClick={() => openLink("https://wa.me/6281214277839")}
+                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
+              >
+                <BsWhatsapp color="green" size={25} />
+                <p>Sales Novia</p>
               </button>
               <button
                 onClick={() => openLink("https://wa.me/6281214277869")}

@@ -116,7 +116,7 @@ export default function ComingSoonPage() {
           </p>
         </button>
 
-        <button
+        {/* <button
           onClick={() => openLink("https://wa.me/6285888388439")}
           className="flex items-center gap-1 cursor-pointer"
         >
@@ -126,7 +126,7 @@ export default function ComingSoonPage() {
           <p className="font-bold text-blue-950 hover:text-blue-600">
             085888388439
           </p>
-        </button>
+        </button> */}
       </footer>
     </div>
   );
