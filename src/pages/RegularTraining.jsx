@@ -25,7 +25,7 @@ export default function RegularTraining() {
   useEffect(() => {
     axios
       .get(
-        "https://ravatraacademy.id/api/routes/productsRoute.php?type=RegularTraining"
+        "https://api.ravatraacademy.id/routes/productsRoute.php?type=RegularTraining"
       )
       .then((res) => {
         if (res.data.success) {

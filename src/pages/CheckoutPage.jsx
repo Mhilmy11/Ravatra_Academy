@@ -62,7 +62,7 @@ export default function CheckoutPage() {
 
     try {
       const res = await axios.post(
-        "https://ravatraacademy.id/api/index.php?route=register",
+        "https://api.ravatraacademy.id/index.php?route=register",
         {
           ...form,
           product_id,
@@ -90,7 +90,7 @@ export default function CheckoutPage() {
   const handleCreateTransaction = async () => {
     try {
       const res = await axios.post(
-        "https://ravatraacademy.id/api/index.php?route=createTransaction",
+        "https://api.ravatraacademy.id/index.php?route=createTransaction",
         {
           user_id: userId,
           product_id,

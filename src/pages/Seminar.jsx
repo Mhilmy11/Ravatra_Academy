@@ -25,7 +25,7 @@ export default function Seminar() {
   useEffect(() => {
     axios
       .get(
-        "https://ravatraacademy.id/api/routes/productsRoute.php?type=Webinar"
+        "https://api.ravatraacademy.id/routes/productsRoute.php?type=Webinar"
       )
       .then((res) => {
         if (res.data.success) {

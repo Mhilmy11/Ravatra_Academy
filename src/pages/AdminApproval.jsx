@@ -14,7 +14,7 @@ const AdminApproval = () => {
   useEffect(() => {
     axios
       .get(
-        `https://ravatraacademy.id/api/index.php?route=getTransaction&id=${id}&user_id=${userId}`
+        `https://api.ravatraacademy.id/index.php?route=getTransaction&id=${id}&user_id=${userId}`
       )
       .then((res) => {
         if (res.data.success) {
@@ -34,7 +34,7 @@ const AdminApproval = () => {
   const handleConfirm = () => {
     if (modalAction === "approve") {
       axios
-        .post("https://ravatraacademy.id/api/index.php?route=approvalPayment", {
+        .post("https://api.ravatraacademy.id/index.php?route=approvalPayment", {
           id,
           user_id: userId,
         })
@@ -48,7 +48,7 @@ const AdminApproval = () => {
         });
     } else if (modalAction === "reject") {
       axios
-        .post("https://ravatraacademy.id/api/index.php?route=rejectPayment", {
+        .post("https://api.ravatraacademy.id/index.php?route=rejectPayment", {
           id,
           user_id: userId,
         })
