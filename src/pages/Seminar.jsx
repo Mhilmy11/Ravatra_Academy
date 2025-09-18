@@ -118,7 +118,7 @@ export default function Seminar() {
               Daftar Pelatihan yang Dibuka
             </h1>
 
-            {products === null ? (
+            {products && products.length > 0 ? (
               <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
                 {products.map((product) => (
                   <div
@@ -126,8 +126,20 @@ export default function Seminar() {
                     className=" bg-gray-100 rounded-xl px-2.5 py-2.5"
                   >
                     <div>
-                      <div>
-                        <img src={CardImage} alt="card-image-1" />
+                      <div className="relative">
+                        <img
+                          src={CardImage}
+                          alt="card-image-product"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+
+                        <div className="absolute inset-0 flex items-end rounded-lg">
+                          <div className="p-3 text-white">
+                            <h2 className=" font-semibold">
+                              {product.product_name}
+                            </h2>
+                          </div>
+                        </div>
                       </div>
 
                       <div className=" px-1 mt-3.5">

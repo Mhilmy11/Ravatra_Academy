@@ -1,4 +1,4 @@
-import { AiFillDownCircle } from "react-icons/ai";
+import { AiFillDownCircle, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { MdOutlineContentCopy } from "react-icons/md";
 import HeroImage from "../assets/hero-checkout-page.png";
 import CardImage from "../assets/card-image-test.png";
@@ -24,6 +24,8 @@ export default function CheckoutPage() {
   const [canPay, setCanPay] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [hasPaid, setHasPaid] = useState(false);
+  const [loadingRegister, setLoadingRegister] = useState(false);
+  const [loadingPayment, setLoadingPayment] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -58,6 +60,7 @@ export default function CheckoutPage() {
   };
 
   const handleRegister = async (e) => {
+    setLoadingRegister(true);
     e.preventDefault();
 
     try {
@@ -77,7 +80,8 @@ export default function CheckoutPage() {
       if (res.data.success) {
         setProduct(res.data.product);
         setUserId(res.data.user_id);
-        setCanPay(true); // aktifkan tombol bayar
+        setLoadingRegister(false);
+        setCanPay(true);
       } else {
         alert("Gagal mendaftar: " + res.data.message);
       }
@@ -88,6 +92,7 @@ export default function CheckoutPage() {
   };
 
   const handleCreateTransaction = async () => {
+    setLoadingPayment(true);
     try {
       const res = await axios.post(
         "https://api.ravatraacademy.id/index.php?route=createTransaction",
@@ -104,7 +109,8 @@ export default function CheckoutPage() {
 
       if (res.data.success) {
         setTransaction(res.data.transaction);
-        setShowPayment(true); // buka modal
+        setShowPayment(true);
+        setLoadingPayment(false);
         setHasPaid(true);
       } else {
         alert("Gagal membuat transaksi: " + res.data.message);
@@ -205,14 +211,22 @@ export default function CheckoutPage() {
               <div>
                 <button
                   type="submit"
-                  disabled={canPay}
+                  disabled={canPay || loadingRegister}
                   className={`w-full ${
                     canPay
                       ? "bg-gray-400 cursor-not-allowed"
                       : "bg-secondary cursor-pointer hover:to-blue-600"
                   } text-white py-3.5 rounded-lg font-semibold text-lg`}
                 >
-                  {canPay ? "SUBMITED" : "SUBMIT"}
+                  {loadingRegister ? (
+                    <div className=" flex justify-center w-full animate-spin">
+                      <AiOutlineLoading3Quarters />
+                    </div>
+                  ) : canPay ? (
+                    "SUBMITED"
+                  ) : (
+                    "SUBMIT"
+                  )}
                 </button>
               </div>
             </form>
@@ -259,7 +273,13 @@ export default function CheckoutPage() {
                   : "bg-secondary hover:bg-blue-400 cursor-pointer"
               }`}
             >
-              Bayar Sekarang
+              {loadingPayment ? (
+                <div className=" flex justify-center w-full animate-spin">
+                  <AiOutlineLoading3Quarters />
+                </div>
+              ) : (
+                <p>Bayar Sekarang</p>
+              )}
             </button>
           </div>
         </div>

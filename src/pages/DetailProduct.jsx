@@ -1,15 +1,15 @@
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BsWhatsapp, BsClock } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
-import { MdOutlineFastfood, MdOutlinePlayLesson } from "react-icons/md";
-import { GiCoffeeCup } from "react-icons/gi";
-import { TbCertificate } from "react-icons/tb";
 import { FiUsers, FiMapPin } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import SanitizedHTML from "../components/SanitizedHTML";
 
 export default function DetailProduct() {
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [detailProduct, setDetailProduct] = useState(null);
 
@@ -36,6 +36,14 @@ export default function DetailProduct() {
       });
   }, [id]);
 
+  const handleCheckout = () => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate(`/checkoutproduct/${detailProduct.id}`);
+      setLoading(false);
+    }, 500);
+  };
+
   const [isDescription, setIsDescription] = useState(true);
   const [isOutlineMateri, setIsOutlineMateri] = useState(false);
   const [isFacilty, setIsFacilty] = useState(false);
@@ -59,7 +67,11 @@ export default function DetailProduct() {
   };
 
   if (!detailProduct) {
-    return <p className=" w-full flex justify-center">...</p>;
+    return (
+      <div className=" w-full flex justify-center animate-spin text-secondary">
+        <AiOutlineLoading3Quarters size={50} />
+      </div>
+    );
   }
 
   return (
@@ -115,31 +127,38 @@ export default function DetailProduct() {
                 <p className=" text-sm font-light"> Peserta</p>
               </p>
               <button
-                onClick={() => navigate(`/checkoutproduct/${detailProduct.id}`)}
+                onClick={handleCheckout}
+                disabled={loading}
                 className=" text-white bg-secondary py-3.5 rounded-lg font-semibold cursor-pointer"
               >
-                Lanjut Bayar
+                {loading ? (
+                  <div className=" flex justify-center w-full animate-spin">
+                    <AiOutlineLoading3Quarters />
+                  </div>
+                ) : (
+                  <p>Lanjut Bayar</p>
+                )}
               </button>
               <div className=" bg-gray-300 h-0.5"></div>
 
               <p className=" font-semibold">Hubungi Sales kami :</p>
               <button
                 onClick={() => openLink("https://wa.me/6281214277859")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
+                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
               >
                 <BsWhatsapp color="green" size={25} />
                 <p>Sales Sofi</p>
               </button>
               <button
                 onClick={() => openLink("https://wa.me/6281214277839")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
+                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
               >
                 <BsWhatsapp color="green" size={25} />
                 <p>Sales Novia</p>
               </button>
               <button
                 onClick={() => openLink("https://wa.me/6281214277869")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
+                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
               >
                 <BsWhatsapp color="green" size={25} />
                 <p>Sales Verdian</p>
@@ -178,7 +197,7 @@ export default function DetailProduct() {
                   : " cursor-pointer"
               }
             >
-              Fasilitas
+              Benefit
             </button>
           </div>
 
@@ -187,29 +206,28 @@ export default function DetailProduct() {
           <div className=" text-gray-500 text-xl">
             {isDescription && (
               <>
-                <p>{detailProduct.description}</p>
+                <SanitizedHTML html={detailProduct.description} />
               </>
             )}
 
             {isOutlineMateri && (
               <>
-                <div>
-                  <p>{detailProduct.outline_materi}</p>
-                </div>
+                <SanitizedHTML html={detailProduct.outline_materi} />
               </>
             )}
 
             {isFacilty && (
               <>
-                <div className=" flex w-full gap-5">
-                  <div className=" bg-blue-50 w-full p-5 flex items-center gap-5 rounded-lg">
-                    <div className=" bg-blue-200 p-5 rounded-lg text-secondary">
-                      <MdOutlinePlayLesson size={60} />
+                <div className=" flex gap-5">
+                  {JSON.parse(detailProduct.facility).map((item, i) => (
+                    <div className=" bg-blue-50 p-5 w-fit rounded-lg">
+                      <div className=" bg-blue-200 p-5 rounded-lg text-secondary">
+                        <p className=" text-2xl font-bold text-gray-600">
+                          {item}
+                        </p>
+                      </div>
                     </div>
-                    <p className=" text-2xl font-bold text-gray-600">
-                      {detailProduct.facility}
-                    </p>
-                  </div>
+                  ))}
                 </div>
               </>
             )}
