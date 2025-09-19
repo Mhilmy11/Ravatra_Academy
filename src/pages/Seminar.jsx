@@ -5,7 +5,7 @@ import { RiComputerLine } from "react-icons/ri";
 import HeroImage from "../assets/seminar-hero-image.png";
 import CardImage from "../assets/card-image-test.png";
 import AboutImage from "../assets/seminar-about-image.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Container from "../components/Container";
@@ -13,6 +13,11 @@ import Container from "../components/Container";
 export default function Seminar() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const seeProduct = useRef(null);
+
+  const handleClickToProduct = () => {
+    seeProduct.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const formatRupiah = (value) => {
     return new Intl.NumberFormat("id-ID", {
@@ -61,7 +66,10 @@ export default function Seminar() {
               </div>
 
               <div>
-                <button className=" bg-secondary text-white hover:bg-blue-800 font-semibold px-5 py-3 rounded-lg cursor-pointer transition duration-300">
+                <button
+                  onClick={handleClickToProduct}
+                  className=" bg-secondary text-white hover:bg-blue-800 font-semibold px-5 py-3 rounded-lg cursor-pointer transition duration-300"
+                >
                   Daftar Sekarang
                 </button>
               </div>
@@ -114,7 +122,10 @@ export default function Seminar() {
           </div>
 
           <div className=" mt-20">
-            <h1 className=" font-bold md:text-3xl text-xl mb-5">
+            <h1
+              ref={seeProduct}
+              className=" font-bold md:text-3xl text-xl mb-5"
+            >
               Daftar Pelatihan yang Dibuka
             </h1>
 
