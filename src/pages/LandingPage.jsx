@@ -38,6 +38,10 @@ export default function LandingPage() {
   const seeProduct = useRef(null);
   const navigate = useNavigate();
 
+  const openLink = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   const handleClickToProduct = () => {
     seeProduct.current?.scrollIntoView({ behavior: "smooth" });
   };
