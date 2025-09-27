@@ -1,3 +1,6 @@
+import { CgShoppingBag } from "react-icons/cg";
+import { TbCertificate2 } from "react-icons/tb";
+import { BsFiletypePdf } from "react-icons/bs";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BsWhatsapp, BsClock } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
@@ -218,14 +221,16 @@ export default function DetailProduct() {
 
             {isFacilty && (
               <>
-                <div className=" flex gap-5">
+                <div className=" md:flex md:gap-5 grid grid-cols-1 gap-y-5">
                   {JSON.parse(detailProduct.facility).map((item, i) => (
-                    <div className=" bg-blue-50 p-5 w-fit rounded-lg">
-                      <div className=" bg-blue-200 p-5 rounded-lg text-secondary">
-                        <p className=" text-2xl font-bold text-gray-600">
-                          {item}
-                        </p>
-                      </div>
+                    <div
+                      key={i}
+                      className=" bg-blue-50 p-3 w-fit rounded-lg flex items-center gap-4"
+                    >
+                      <div className=" bg-blue-200 p-3 rounded-lg text-secondary"></div>
+                      <p className=" text-2xl font-semibold text-gray-600">
+                        {item}
+                      </p>
                     </div>
                   ))}
                 </div>

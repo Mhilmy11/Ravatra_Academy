@@ -1,19 +1,32 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+
 import Navbar from "./components/Navbar";
-import RegularTraining from "./pages/RegularTraining";
 import Footer from "./components/Footer";
-import ComingSoonPage from "./pages/ComingSoonPage";
-import InHouseTraining from "./pages/InHouseTraining";
+import LandingPage from "./pages/LandingPage";
+
+import RegularTraining from "./pages/RegularTraining";
 import Kursus from "./pages/Kursus";
 import Seminar from "./pages/Seminar";
+import ELearning from "./pages/ELearning";
+
 import DetailProduct from "./pages/DetailProduct";
 import CheckoutPage from "./pages/CheckoutPage";
 import AdminApproval from "./pages/AdminApproval";
 
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+
 const MainLayout = () => {
   const location = useLocation();
 
-  const hideNavbarLayout = ["/checkoutproduct", "/admin-approval"];
+  const hideNavbarLayout = [
+    "/checkoutproduct",
+    "/admin-approval",
+    "/login",
+    "/dashboard",
+  ];
   return (
     <div className="min-h-screen flex flex-col">
       {!hideNavbarLayout.find((route) =>
@@ -21,7 +34,7 @@ const MainLayout = () => {
       ) && <Navbar />}
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<ComingSoonPage />} />
+          <Route path="/" element={<LandingPage />} />
 
           <Route
             path="/admin-approval/:id/:userId"
@@ -30,9 +43,9 @@ const MainLayout = () => {
 
           {/* product pages */}
           <Route path="/regulartraining" element={<RegularTraining />} />
-          <Route path="/inhousetraining" element={<InHouseTraining />} />
+          <Route path="/elearning" element={<ELearning />} />
           <Route path="/seminar" element={<Seminar />} />
-          {/* <Route path="/kursus" element={<Kursus />} /> */}
+          <Route path="/kursus" element={<Kursus />} />
 
           <Route
             path="/checkoutproduct/:product_id"
@@ -57,11 +70,25 @@ const MainLayout = () => {
             element={<DetailProduct />}
           />
 
-          <Route path="*" element={<ComingSoonPage />} />
+          {/* Auth routes */}
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Fallback */}
+          <Route path="*" element={<LandingPage />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!hideNavbarLayout.find((route) =>
+        location.pathname.startsWith(route)
+      ) && <Footer />}
     </div>
   );
 };

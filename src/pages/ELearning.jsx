@@ -1,16 +1,19 @@
 import { BiBookOpen, BiVideo, BiCalendar } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
-import { FiUsers, FiMapPin } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
+import { FiUsers, FiMapPin } from "react-icons/fi";
+
+import HeroImage from "../assets/in-house-hero-image.png";
+import AboutImage from "../assets/in-house-about-image.jpg";
 import CardImage from "../assets/card-image-test.png";
-import HeroImage from "../assets/hero-image.png";
-import AboutImage from "../assets/image-about.png";
-import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
+
 import Container from "../components/Container";
 
-export default function Kursus() {
+export default function ELearning() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const seeProduct = useRef(null);
@@ -29,7 +32,9 @@ export default function Kursus() {
 
   useEffect(() => {
     axios
-      .get("https://api.ravatraacademy.id/routes/productsRoute.php?type=Kursus")
+      .get(
+        "https://api.ravatraacademy.id/routes/productsRoute.php?type=eLearning"
+      )
       .then((res) => {
         if (res.data.success) {
           setProducts(res.data.data);
@@ -51,11 +56,12 @@ export default function Kursus() {
 
             <div className=" py-5 md:text-base text-sm">
               <p>
-                Ingin memahami konsep perpajakan secara menyeluruh dan membangun
-                fondasi keterampilan yang kuat?{" "}
-                <span className=" font-bold pr-1">Kursus Ravatra Academy</span>
-                hadir dengan materi komprehensif, pengajar berpengalaman, dan
-                pendekatan pembelajaran praktis.
+                Ingin memahami konsep perpajakan secara menyeluruh dengan cara
+                yang fleksibel?{" "}
+                <span className=" font-bold pr-1">
+                  Kursus E-Learning Perpajakan Ravatra Academy
+                </span>
+                Kini tersedia yang bisa kamu akses kapan saja dan di mana saja.
               </p>
             </div>
 
@@ -74,20 +80,20 @@ export default function Kursus() {
           </div>
         </div>
 
-        <div className=" md:flex hidden justify-between w-full items-center px-10 mt-20">
+        <div className=" md:flex hidden justify-between w-full items-center px-10 mt-20 gap-5">
           <div className=" w-1/2">
             <img src={AboutImage} alt="image-about" />
           </div>
 
           <div className=" w-1/2 flex flex-col gap-3.5">
-            <h2 className=" font-bold text-3xl">Kursus Ravatra Academy</h2>
+            <h2 className=" font-bold text-3xl">E-Learning Ravatra Academy</h2>
             <p className=" text-justify">
-              Kursus Ravatra Academy adalah program pembelajaran pajak yang
-              dirancang untuk memberikan pemahaman menyeluruh bagi pemula maupun
-              praktisi. Dengan materi yang komprehensif, pengajar berpengalaman,
-              serta metode yang interaktif, kami membantu peserta membangun
-              dasar yang kuat dan siap menghadapi tantangan perpajakan di dunia
-              nyata.
+              Kursus E-Learning Ravatra Academy adalah program pembelajaran
+              pajak berbasis online yang dirancang untuk memberikan pemahaman
+              menyeluruh bagi pemula maupun praktisi. Dengan materi komprehensif
+              yang dapat diakses kapan saja dan pengajar berpengalaman, peserta
+              dapat membangun dasar yang kuat serta siap menghadapi tantangan
+              perpajakan di dunia nyata.
             </p>
 
             <p className=" font-semibold">Kenapa memilih kami?</p>
@@ -97,19 +103,19 @@ export default function Kursus() {
                 <div className=" bg-blue-200 text-secondary p-1.5 rounded-lg">
                   <RiComputerLine size={16.5} />
                 </div>
-                <p>Materi komprehensif dari dasar hingga lanjutan</p>
+                <p>Pengajar Berpengalaman: Praktisi dan akademisi pajak.</p>
               </div>
               <div className=" flex gap-2 items-center">
                 <div className=" bg-blue-200 text-secondary p-1.5 rounded-lg">
                   <BiBookOpen size={16.5} />
                 </div>
-                <p>Pendampingan langsung dari pengajar berpengalaman</p>
+                <p>Fleksibel: Bisa diakses kapan saja, di mana saja.</p>
               </div>
               <div className=" flex gap-2 items-center">
                 <div className=" bg-blue-200 text-secondary p-1.5 rounded-lg">
                   <BiVideo size={16.5} />
                 </div>
-                <p>Akses fleksibel: Belajar mandiri maupun terjadwal</p>
+                <p>Sertifikat Resmi: Bukti keterampilan profesional.</p>
               </div>
             </div>
           </div>
@@ -136,8 +142,8 @@ export default function Kursus() {
                       />
 
                       <div className="absolute inset-0 flex items-end rounded-lg">
-                        <div className="p-3 text-white">
-                          <h2 className=" font-semibold">
+                        <div className="p-6 text-white">
+                          <h2 className=" font-semibold text-xl">
                             {product.product_name}
                           </h2>
                         </div>

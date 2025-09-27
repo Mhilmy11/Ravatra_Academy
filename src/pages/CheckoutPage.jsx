@@ -123,7 +123,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <div className=" md:px-20 mt-10">
+      <div className=" md:px-20 my-10">
         <img
           className=" w-full"
           src={HeroImage}

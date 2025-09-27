@@ -1,31 +1,27 @@
 import { AiOutlineMenu } from "react-icons/ai";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import RavatraLogoNavbar from "../assets/logo-only-ravatra-academy-nobg.png";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Container from "./Container";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [activePage, setActivePage] = useState("/");
   const [isActiveMenu, setIsActiveMenu] = useState(false);
 
   const page = [
     { label: "Beranda", path: "/" },
     { label: "Regular Training", path: "/regulartraining" },
-    // { label: "In-House Training", path: "/inhousetraining" },
     { label: "Webinar", path: "/seminar" },
-    // { label: "Kursus", path: "/kursus" },
+    { label: "Kursus", path: "/kursus" },
+    { label: "e-Learning", path: "/elearning" },
   ];
 
   const handleNavigation = (path) => {
-    setActivePage(path);
     navigate(path);
   };
 
-  useEffect(() => {
-    setActivePage(window.location.pathname);
-  }, []);
   return (
     <>
       <Container>
@@ -42,14 +38,14 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className=" md:flex md:gap-7 hidden">
+          <div className="md:flex md:gap-7 hidden">
             {page.map((item) => (
               <button
                 key={item.path}
                 onClick={() => handleNavigation(item.path)}
-                className={` pb-1 uppercase cursor-pointer hover:text-blue-900 transition-colors duration-300 ${
-                  activePage === item.path
-                    ? " text-secondary border-b-4 border-blue-950 font-bold"
+                className={`pb-1 uppercase cursor-pointer hover:text-blue-900 transition-colors duration-300 ${
+                  location.pathname === item.path
+                    ? "text-secondary border-b-4 border-blue-950 font-bold"
                     : ""
                 }`}
               >

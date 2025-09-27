@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
-import HeaderWave from "../assets/wave.svg";
+// import HeaderWave from "../assets/wave.svg";
 import RavatraLogo from "../assets/logo-ravatra-academy-nobg.png";
 import { useNavigate } from "react-router";
 
