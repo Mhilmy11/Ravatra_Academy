@@ -113,7 +113,10 @@ export default function LandingPage() {
                 >
                   Lihat Program <AiOutlineArrowDown size={25} />
                 </button>
-                <button className=" cursor-pointer hover:bg-green-600 hover:text-white transition flex items-center gap-2 bg-white text-black rounded-xl py-3 px-4">
+                <button
+                  onClick={() => openLink("https://wa.me/6281214277869")}
+                  className=" cursor-pointer hover:bg-green-600 hover:text-white transition flex items-center gap-2 bg-white text-black rounded-xl py-3 px-4"
+                >
                   <BsWhatsapp size={25} /> Hubungi Kami
                 </button>
               </div>
@@ -328,7 +331,10 @@ export default function LandingPage() {
                 </div>
 
                 <div className=" pt-2 text-lg font-semibold">
-                  <button className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full">
+                  <button
+                    onClick={() => openLink("https://wa.me/6281214277869")}
+                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
+                  >
                     <BsWhatsapp /> Hubungi Kami
                   </button>
                   <button
@@ -369,7 +375,10 @@ export default function LandingPage() {
                 </div>
 
                 <div className=" pt-2 text-lg font-semibold">
-                  <button className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full">
+                  <button
+                    onClick={() => openLink("https://wa.me/6281214277869")}
+                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
+                  >
                     <BsWhatsapp /> Hubungi Kami
                   </button>
                   <button
@@ -410,7 +419,10 @@ export default function LandingPage() {
                 </div>
 
                 <div className=" pt-2 text-lg font-semibold">
-                  <button className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full">
+                  <button
+                    onClick={() => openLink("https://wa.me/6281214277869")}
+                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
+                  >
                     <BsWhatsapp /> Hubungi Kami
                   </button>
                   <button
@@ -451,7 +463,10 @@ export default function LandingPage() {
                 </div>
 
                 <div className=" pt-2 text-lg font-semibold">
-                  <button className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full">
+                  <button
+                    onClick={() => openLink("https://wa.me/6281214277869")}
+                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
+                  >
                     <BsWhatsapp /> Hubungi Kami
                   </button>
                   <button
