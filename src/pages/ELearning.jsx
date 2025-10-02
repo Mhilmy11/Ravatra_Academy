@@ -33,7 +33,7 @@ export default function ELearning() {
   useEffect(() => {
     axios
       .get(
-        "https://api.ravatraacademy.id/routes/productsRoute.php?type=eLearning"
+        "https://api.ravatraacademy.id/index.php?route=products&type=eLearning"
       )
       .then((res) => {
         if (res.data.success) {

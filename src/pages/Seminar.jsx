@@ -1,4 +1,4 @@
-import { BiBookOpen, BiVideo, BiChevronDown, BiCalendar } from "react-icons/bi";
+import { BiBookOpen, BiVideo, BiCalendar } from "react-icons/bi";
 import { FiUsers, FiMapPin } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
 import { RiComputerLine } from "react-icons/ri";
@@ -30,7 +30,7 @@ export default function Seminar() {
   useEffect(() => {
     axios
       .get(
-        "https://api.ravatraacademy.id/routes/productsRoute.php?type=Webinar"
+        "https://api.ravatraacademy.id/index.php?route=products&type=Webinar"
       )
       .then((res) => {
         if (res.data.success) {

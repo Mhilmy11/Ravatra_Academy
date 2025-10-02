@@ -2,12 +2,15 @@ import { BiBookOpen, BiVideo, BiCalendar } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
 import { FiUsers, FiMapPin } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
+
 import CardImage from "../assets/card-image-test.png";
 import HeroImage from "../assets/hero-image.png";
-import AboutImage from "../assets/image-about.png";
+import AboutImage from "../assets/kursus-about-image.jpg";
+
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import axios from "axios";
+
 import Container from "../components/Container";
 
 export default function Kursus() {
@@ -29,7 +32,7 @@ export default function Kursus() {
 
   useEffect(() => {
     axios
-      .get("https://api.ravatraacademy.id/routes/productsRoute.php?type=Kursus")
+      .get("https://api.ravatraacademy.id/index.php?route=products&type=Kursus")
       .then((res) => {
         if (res.data.success) {
           setProducts(res.data.data);
@@ -74,14 +77,14 @@ export default function Kursus() {
           </div>
         </div>
 
-        <div className=" md:flex hidden justify-between w-full items-center px-10 mt-20">
+        <div className=" md:flex hidden justify-between w-full items-center px-10 mt-20 gap-5">
           <div className=" w-1/2">
             <img src={AboutImage} alt="image-about" />
           </div>
 
           <div className=" w-1/2 flex flex-col gap-3.5">
             <h2 className=" font-bold text-3xl">Kursus Ravatra Academy</h2>
-            <p className=" text-justify">
+            <p className=" text-justify text-sm">
               Kursus Ravatra Academy adalah program pembelajaran pajak yang
               dirancang untuk memberikan pemahaman menyeluruh bagi pemula maupun
               praktisi. Dengan materi yang komprehensif, pengajar berpengalaman,

@@ -6,8 +6,10 @@ import { login } from "../services/auth";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await login(email, password);
@@ -22,6 +24,7 @@ function Login() {
       console.error(err);
       alert("Terjadi kesalahan pada login");
     }
+    setLoading(false);
   };
 
   return (
@@ -58,8 +61,13 @@ function Login() {
             />
           </div>
 
-          <button className=" cursor-pointer mt-5 bg-secondary  w-full rounded-xl py-3 text-white font-semibold text-lg">
-            LOG IN
+          <button
+            className={`cursor-pointer mt-5 w-full rounded-xl py-3 text-white font-semibold text-lg ${
+              loading ? "bg-slate-400 cursor-none" : "bg-secondary"
+            }`}
+            disabled={loading === true}
+          >
+            {loading ? "LOGING IN..." : "LOG IN"}
           </button>
         </form>
       </div>

@@ -10,6 +10,10 @@ import { useNavigate } from "react-router";
 import Container from "../components/Container";
 import HeroImage from "../assets/landing-page-image.png";
 import ImageAbout from "../assets/image-about-section.png";
+import RegularTrainingImage from "../assets/regulartraining-card-image.jpeg";
+import WebinarImage from "../assets/webinar-card-image.jpg";
+import KursusImage from "../assets/in-house-about-image.jpg";
+import ElearningImage from "../assets/kursus-about-image.jpg";
 
 import Team01 from "../assets/teams-assets/team01.png";
 import Team02 from "../assets/teams-assets/team02.png";
@@ -179,7 +183,7 @@ export default function LandingPage() {
                 </div>
                 <p className=" text-center">Yetti Verdiani</p>
                 <p className=" text-secondary font-bold">
-                  BUSINESS DEVELOPMENT MANAGER
+                  Tax Training Development Program
                 </p>
               </div>
 
@@ -308,9 +312,9 @@ export default function LandingPage() {
             <div className=" snap-x overflow-x-auto flex gap-6 scroll-smooth scroll-hide py-10 px-10 rounded-xl">
               <div className=" snap-start shrink-0 scroll-ml-5 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
                 <img
-                  className=" w-[300px] rounded-lg"
-                  src={ImageAbout}
-                  alt=""
+                  className=" w-[300px] h-[205px] rounded-lg"
+                  src={RegularTrainingImage}
+                  alt="regulartraining-card-image"
                 />
 
                 <h2 className=" font-bold text-xl py-6">Regular Training</h2>
@@ -352,9 +356,9 @@ export default function LandingPage() {
 
               <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
                 <img
-                  className=" w-[300px] rounded-lg"
-                  src={ImageAbout}
-                  alt=""
+                  className=" w-[300px] h-[205px] rounded-lg"
+                  src={WebinarImage}
+                  alt="webinar-card-image"
                 />
 
                 <h2 className=" font-bold text-xl py-6">Webinar</h2>
@@ -396,9 +400,9 @@ export default function LandingPage() {
 
               <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
                 <img
-                  className=" w-[300px] rounded-lg"
-                  src={ImageAbout}
-                  alt=""
+                  className=" w-[300px] h-[205px] rounded-lg"
+                  src={KursusImage}
+                  alt="kursus-card-image"
                 />
 
                 <h2 className=" font-bold text-xl py-6">Kursus</h2>
@@ -440,9 +444,9 @@ export default function LandingPage() {
 
               <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
                 <img
-                  className=" w-[300px] rounded-lg"
-                  src={ImageAbout}
-                  alt=""
+                  className=" w-[300px] h-[205px] rounded-lg"
+                  src={ElearningImage}
+                  alt="elearning-card-image"
                 />
 
                 <h2 className=" font-bold text-xl py-6">e Learning</h2>
