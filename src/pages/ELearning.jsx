@@ -222,17 +222,10 @@ export default function ELearning() {
             </div>
           ) : (
             <div className=" text-center text-slate-400">
-              ... Produk Belum Tersedia ...
+              ... Tidak ada pelatihan mendatang ...
             </div>
           )}
         </div>
-
-        {/* <div className=" flex w-full justify-center mt-5">
-          <button className=" bg-blue-200 text-secondary px-5 py-2.5 rounded-lg flex gap-1.5 items-center font-semibold cursor-pointer">
-            <p>Lihat lebih banyak</p>
-            <BiChevronDown size={20} />
-          </button>
-        </div> */}
       </div>
     </Container>
   );
