@@ -154,24 +154,6 @@ export default function ELearning() {
                       <div className=" grid grid-cols-2 gap-y-3.5 text-xs my-3.5">
                         <div className=" flex items-center gap-1">
                           <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                            <BiCalendar size={15} />
-                          </div>
-                          <p className=" text-neutral-500">
-                            {product.schedule}
-                          </p>
-                        </div>
-
-                        <div className=" flex items-center gap-1">
-                          <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                            <BsClock size={15} />
-                          </div>
-                          <p className=" text-neutral-500">
-                            {product.start_end_time}
-                          </p>
-                        </div>
-
-                        <div className=" flex items-center gap-1">
-                          <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
                             <FiMapPin size={15} />
                           </div>
                           <p className=" text-neutral-500">
@@ -189,20 +171,19 @@ export default function ELearning() {
                         </div>
                       </div>
 
-                      <div className=" pb-2 md:text-base text-xs">
-                        <p className=" font-semibold">Advicer/Pembicara :</p>
-                        <p className=" text-gray-500 text-xs">
-                          {product.pembicara}
-                        </p>
-                      </div>
-
                       <div className=" h-0.5 bg-gray-300 rounded-full"></div>
 
-                      <p className=" font-bold text-[22px] my-3.5 flex items-center gap-1.5">
-                        <p>{formatRupiah(product.product_price)}</p>
-                        <p className=" text-sm font-light line-through">
-                          {product.dummy_discount}
-                        </p>
+                      <p className=" font-bold text-[22px] my-3.5">
+                        <div>
+                          <p className=" text-xs font-normal">EarlyBird :</p>
+                        </div>
+
+                        <div className=" flex items-center gap-1.5">
+                          <p>{formatRupiah(product.product_price)}</p>
+                          <p className=" text-sm font-light line-through">
+                            {product.dummy_discount}
+                          </p>
+                        </div>
                       </p>
 
                       <button
