@@ -117,7 +117,7 @@ export default function Kursus() {
                 <CardProduct
                   key={product.id}
                   product={product}
-                  showButton={false}
+                  showButton={true}
                 />
               ))}
             </div>
