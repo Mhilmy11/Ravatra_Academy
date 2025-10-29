@@ -72,12 +72,14 @@ export default function CardProduct({ product, showButton }) {
 
             <div className=" h-0.5 bg-gray-300 rounded-full"></div>
 
-            <p className=" font-bold text-[22px] my-3.5 flex items-center gap-1.5">
-              <p>{formatRupiah(product.product_price)}</p>
-              <p className=" text-sm font-light line-through">
-                {product.dummy_discount}
+            {showButton && (
+              <p className=" font-bold text-[22px] my-3.5 flex items-center gap-1.5">
+                <p>{formatRupiah(product.product_price)}</p>
+                <p className=" text-sm font-light line-through">
+                  {product.dummy_discount}
+                </p>
               </p>
-            </p>
+            )}
 
             {showButton && (
               <button
