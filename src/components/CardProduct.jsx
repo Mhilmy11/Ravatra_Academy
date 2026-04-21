@@ -18,77 +18,72 @@ export default function CardProduct({ product, showButton }) {
   };
   return (
     <>
-      <div key={product.id} className=" bg-gray-100 rounded-xl px-2.5 py-2.5">
-        <div>
-          <div className="relative">
-            <img
-              src={CardImage}
-              alt="card-image-product"
-              className="w-full h-full object-cover rounded-lg"
-            />
+      <div
+        key={product.id}
+        className="max-w-sm bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden border border-gray-200"
+      >
+        <div className="relative h-48">
+          <img
+            src="https://images.unsplash.com/photo-1557804483-ef3ae78eca57"
+            alt="Program Training"
+            className="w-full h-full object-cover"
+          />
 
-            <div className="absolute inset-0 flex items-end rounded-lg">
-              <div className="p-3 text-white">
-                <h2 className=" font-semibold">{product.product_name}</h2>
-              </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+          <span className="absolute top-3 left-3 bg-yellow-500 text-white text-xs px-3 py-1 rounded-full shadow">
+            {product.product_type}
+          </span>
+
+          <div className="absolute bottom-3 left-3 text-white">
+            <p className="text-xs opacity-80">Pembicara</p>
+            <p className="font-semibold text-sm">{product.pembicara}</p>
+          </div>
+        </div>
+
+        <div className="p-4">
+          <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+            {product.product_name}
+          </h3>
+
+          <div className="space-y-1 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <BiCalendar size={16} className="text-blue-500" />
+              <span>{product.schedule}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FiMapPin size={16} className="text-red-500" />
+              <span>{product.location}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <BsClock size={16} className="text-green-500" />
+              <span>{product.start_end_time}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FiUsers size={16} className="text-purple-500" />
+              <span>{product.pendaftar}</span>
             </div>
           </div>
 
-          <div className=" px-1 mt-3.5">
-            <div className=" grid grid-cols-2 gap-y-3.5 text-xs my-3.5">
-              <div className=" flex items-center gap-1">
-                <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                  <BiCalendar size={15} />
-                </div>
-                <p className=" text-neutral-500">{product.schedule}</p>
-              </div>
-
-              <div className=" flex items-center gap-1">
-                <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                  <BsClock size={15} />
-                </div>
-                <p className=" text-neutral-500">{product.start_end_time}</p>
-              </div>
-
-              <div className=" flex items-center gap-1">
-                <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                  <FiMapPin size={15} />
-                </div>
-                <p className=" text-neutral-500">{product.location}</p>
-              </div>
-
-              <div className=" flex items-center gap-1">
-                <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                  <FiUsers size={15} />
-                </div>
-                <p className=" text-neutral-500">{product.pendaftar}</p>
-              </div>
-            </div>
-
-            <div className=" pb-2 md:text-base text-xs">
-              <p className=" font-semibold">Advicer/Pembicara :</p>
-              <p className=" text-gray-500 text-xs">{product.pembicara}</p>
-            </div>
-
-            <div className=" h-0.5 bg-gray-300 rounded-full"></div>
-
-            {showButton && (
-              <p className=" font-bold text-[22px] my-3.5 flex items-center gap-1.5">
-                <p>{formatRupiah(product.product_price)}</p>
-                <p className=" text-sm font-light line-through">
-                  {product.dummy_discount}
-                </p>
+          <div className="mt-4 flex items-end justify-between">
+            <div>
+              <p className="text-xs line-through text-gray-500">
+                {formatRupiah(product.discount)}
               </p>
-            )}
+              <p className="text-xl font-bold text-blue-800">
+                {formatRupiah(product.product_price)}
+              </p>
+            </div>
 
             {showButton && (
               <button
-                onClick={() =>
-                  navigate(`/regulartraining/detailproduct/${product.id}`)
-                }
-                className=" bg-secondary py-3.5 w-full font-semibold rounded-lg text-white cursor-pointer"
+                onClick={() => navigate(`/product/${product.id}`)}
+                className=" cursor-pointer px-4 py-2 bg-secondary text-white rounded-lg hover:bg-blue-800 transition"
               >
-                Daftar Sekarang
+                Daftar
               </button>
             )}
           </div>

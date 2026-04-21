@@ -32,9 +32,7 @@ export default function ELearning() {
 
   useEffect(() => {
     axios
-      .get(
-        "https://api.ravatraacademy.id/index.php?route=products&type=eLearning"
-      )
+      .get("https://apiv2.ravatraacademy.id/api/products?type=eLearning")
       .then((res) => {
         if (res.data.success) {
           setProducts(res.data.data);
@@ -189,7 +187,7 @@ export default function ELearning() {
                       <button
                         onClick={() =>
                           navigate(
-                            `/regulartraining/detailproduct/${product.id}`
+                            `/regulartraining/detailproduct/${product.id}`,
                           )
                         }
                         className=" bg-secondary py-3.5 w-full font-semibold rounded-lg text-white cursor-pointer"

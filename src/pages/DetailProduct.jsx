@@ -1,24 +1,25 @@
-import { CgShoppingBag } from "react-icons/cg";
-import { TbCertificate2 } from "react-icons/tb";
-import { BsFiletypePdf } from "react-icons/bs";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { BsWhatsapp, BsClock } from "react-icons/bs";
-import { BiCalendar } from "react-icons/bi";
-import { FiUsers, FiMapPin } from "react-icons/fi";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaMapMarkerAlt,
+  FaUsers,
+  FaUser,
+  FaWhatsapp,
+} from "react-icons/fa";
+
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import SanitizedHTML from "../components/SanitizedHTML";
 
-export default function DetailProduct() {
+export default function ProductDetail() {
+  const [activeTab, setActiveTab] = useState("deskripsi");
+
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [detailProduct, setDetailProduct] = useState(null);
-
-  const openLink = (url) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
 
   const formatRupiah = (value) => {
     return new Intl.NumberFormat("id-ID", {
@@ -28,14 +29,25 @@ export default function DetailProduct() {
     }).format(value);
   };
 
+  const tabs = [
+    { id: "deskripsi", label: "Deskripsi" },
+    { id: "outline", label: "Outline Materi" },
+    { id: "benefit", label: "Benefit" },
+  ];
+
   useEffect(() => {
     axios
-      .get(`https://api.ravatraacademy.id/index.php?route=products&id=${id}`)
+      .get(`https://apiv2.ravatraacademy.id/api/products/${id}`)
       .then((res) => {
-        if (res.data.success) setDetailProduct(res.data.data);
+        if (res.data.status === "success") {
+          setDetailProduct(res.data.data);
+        }
       })
       .catch((err) => {
-        console.error(err.message);
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [id]);
 
@@ -47,27 +59,13 @@ export default function DetailProduct() {
     }, 500);
   };
 
-  const [isDescription, setIsDescription] = useState(true);
-  const [isOutlineMateri, setIsOutlineMateri] = useState(false);
-  const [isFacilty, setIsFacilty] = useState(false);
+  let facilities = [];
 
-  const handleToClickDescription = () => {
-    setIsDescription(true);
-    setIsOutlineMateri(false);
-    setIsFacilty(false);
-  };
-
-  const handleClickToOutlineMateri = () => {
-    setIsDescription(false);
-    setIsOutlineMateri(true);
-    setIsFacilty(false);
-  };
-
-  const handleClickToFacilty = () => {
-    setIsDescription(false);
-    setIsOutlineMateri(false);
-    setIsFacilty(true);
-  };
+  try {
+    facilities = JSON.parse(product?.facility || "[]");
+  } catch {
+    facilities = [];
+  }
 
   if (!detailProduct) {
     return (
@@ -78,167 +76,163 @@ export default function DetailProduct() {
   }
 
   return (
-    <>
-      <div className=" md:px-20 px-5 mt-10">
-        <div className=" md:flex items-start justify-between gap-14 w-full">
-          <div className=" md:flex md:w-[70%] items-center gap-7">
-            <div>
-              <p className=" font-bold md:text-3xl md:w-full text-xl">
-                {detailProduct.product_name}
-              </p>
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      <div className="relative bg-[#000B76] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 to-transparent"></div>
 
-              <div className=" grid md:grid-cols-1 grid-cols-2 gap-1 text-xs pb-3 pt-3 md:text-base">
-                <div className=" flex gap-2.5 items-center">
-                  <div className=" bg-blue-200 p-2 rounded-lg">
-                    <BiCalendar size={20} className=" text-secondary" />
-                  </div>
-                  <p className=" text-gray-400">{detailProduct.schedule}</p>
-                </div>
-                <div className=" flex gap-2.5 items-center">
-                  <div className=" bg-blue-200 p-2 rounded-lg">
-                    <BsClock size={20} className=" text-secondary" />
-                  </div>
-                  <p className=" text-gray-400">
-                    {detailProduct.start_end_time}
-                  </p>
-                </div>
-                <div className=" flex gap-2.5 items-center">
-                  <div className=" bg-blue-200 p-2 rounded-lg">
-                    <FiMapPin size={20} className=" text-secondary" />
-                  </div>
-                  <p className=" text-gray-400">{detailProduct.location}</p>
-                </div>
-                <div className=" flex gap-2.5 items-center">
-                  <div className=" bg-blue-200 p-2 rounded-lg">
-                    <FiUsers size={20} className=" text-secondary" />
-                  </div>
-                  <p className=" text-gray-400">{detailProduct.pendaftar}</p>
-                </div>
-              </div>
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-12 grid md:grid-cols-2 gap-10">
+          <div>
+            <span className="bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-semibold">
+              Best Seller
+            </span>
 
-              <div className=" pb-2 md:text-base text-sm">
-                <p className=" font-semibold">Advicer/Pembicara :</p>
-                <p className=" text-gray-500">{detailProduct.pembicara}</p>
-              </div>
+            <h1
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-4 leading-tight 
+             overflow-hidden 
+             [display:-webkit-box] 
+             [-webkit-line-clamp:2] 
+             [-webkit-box-orient:vertical] 
+             break-words"
+            >
+              {detailProduct.product_name}
+            </h1>
+
+            <p className="mt-4 text-gray-200 max-w-lg">
+              Upgrade skill pajak kamu dari basic sampai advance bersama
+              konsultan pajak profesional.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 mt-8">
+              <Info
+                icon={<FaCalendarAlt />}
+                label="Mulai"
+                value={detailProduct.schedule}
+              />
+              <Info
+                icon={<FaClock />}
+                label="Waktu"
+                value={detailProduct.start_end_time}
+              />
+              <Info
+                icon={<FaMapMarkerAlt />}
+                label="Lokasi"
+                value={detailProduct.location}
+              />
+              <Info
+                icon={<FaUsers />}
+                label="Peserta"
+                value={detailProduct.pendaftar}
+              />
+            </div>
+
+            <div className="flex items-center gap-3 mt-6">
+              <FaUser />
+              <span className="text-sm text-gray-200">
+                {detailProduct.pembicara}
+              </span>
             </div>
           </div>
 
-          <div className=" md:w-[30%] flex flex-col md:py-0 py-5 gap-y-3.5">
-            <div className=" px-2.5 py-5 shadow-xl rounded-lg bg-gray-100 w-full flex flex-col gap-3.5 justify-center">
-              <p className=" font-bold text-3xl flex items-end">
-                {formatRupiah(detailProduct.product_price)}/{" "}
-                <p className=" text-sm font-light"> Peserta</p>
-              </p>
+          <div className="relative">
+            <div className="bg-white text-gray-800 rounded-3xl shadow-2xl p-8 sticky top-10">
+              <p className="text-sm text-gray-500">*Harga untuk satu Peserta</p>
+              <h2 className="text-4xl font-bold text-[#000B76] mt-1">
+                {formatRupiah(detailProduct.product_price)}
+              </h2>
+
               <button
                 onClick={handleCheckout}
                 disabled={loading}
-                className=" text-white bg-secondary py-3.5 rounded-lg font-semibold cursor-pointer"
+                className="mt-6 w-full cursor-pointer bg-yellow-400 text-black font-semibold py-3 rounded-xl hover:scale-105 transition"
               >
                 {loading ? (
                   <div className=" flex justify-center w-full animate-spin">
                     <AiOutlineLoading3Quarters />
                   </div>
                 ) : (
-                  <p>Lanjut Bayar</p>
+                  <p>Checkout Sekarang</p>
                 )}
               </button>
-              <div className=" bg-gray-300 h-0.5"></div>
 
-              <p className=" font-semibold">Hubungi Sales kami :</p>
-              <button
-                onClick={() => openLink("https://wa.me/6281214277859")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
-              >
-                <BsWhatsapp color="green" size={25} />
-                <p>Sales Sofi</p>
-              </button>
-              <button
-                onClick={() => openLink("https://wa.me/6281214277839")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
-              >
-                <BsWhatsapp color="green" size={25} />
-                <p>Sales Novia</p>
-              </button>
-              <button
-                onClick={() => openLink("https://wa.me/6281214277869")}
-                className=" cursor-pointer border-2 rounded-lg border-green-800 bg-green-100 hover:bg-green-200 text-green-950 py-3.5 font-semibold flex items-center justify-center gap-2"
-              >
-                <BsWhatsapp color="green" size={25} />
-                <p>Sales Verdian</p>
-              </button>
+              {/* WA BUTTON */}
+              <div className="grid grid-cols-1 gap-3 mt-4">
+                {[1, 2, 3].map((i) => (
+                  <button
+                    key={i}
+                    className="flex items-center justify-center gap-2 border border-green-500 text-green-600 py-2 rounded-xl hover:bg-green-50"
+                  >
+                    <FaWhatsapp /> Chat Sales {i}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-6 text-xs text-gray-400 text-center">
+                Kuota terbatas, segera daftar 🚀
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className=" mt-10">
-          <div className=" flex md:gap-14 gap-5 md:text-2xl text-xl font-semibold pb-4">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 py-12">
+        <div className="flex gap-3 mb-8">
+          {tabs.map((tab) => (
             <button
-              onClick={handleToClickDescription}
-              className={
-                isDescription === true
-                  ? " bg-blue-100 text-secondary px-5 py-2.5 rounded-lg"
-                  : " cursor-pointer"
-              }
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={` cursor-pointer px-5 py-2 rounded-full text-sm font-medium transition ${
+                activeTab === tab.id
+                  ? "bg-[#000B76] text-white shadow"
+                  : "bg-white border text-gray-500 hover:bg-gray-100"
+              }`}
             >
-              Deskripsi
+              {tab.label}
             </button>
-            <button
-              onClick={handleClickToOutlineMateri}
-              className={
-                isOutlineMateri === true
-                  ? " bg-blue-100 text-secondary px-5 py-2.5 rounded-lg"
-                  : " cursor-pointer"
-              }
-            >
-              Outline Materi
-            </button>
-            <button
-              onClick={handleClickToFacilty}
-              className={
-                isFacilty === true
-                  ? " bg-blue-100 text-secondary px-5 py-2.5 rounded-lg"
-                  : " cursor-pointer"
-              }
-            >
-              Benefit
-            </button>
-          </div>
+          ))}
+        </div>
 
-          <div className=" bg-gray-300 h-0.5 w-full mb-10"></div>
+        <div className="bg-white rounded-3xl shadow-lg p-8 leading-relaxed">
+          {activeTab === "deskripsi" && (
+            <SanitizedHTML html={detailProduct.description} />
+          )}
 
-          <div className=" text-gray-500 text-xl">
-            {isDescription && (
-              <>
-                <SanitizedHTML html={detailProduct.description} />
-              </>
-            )}
+          {activeTab === "outline" && (
+            <>
+              <SanitizedHTML html={detailProduct.outline_materi} />
+            </>
+          )}
 
-            {isOutlineMateri && (
-              <>
-                <SanitizedHTML html={detailProduct.outline_materi} />
-              </>
-            )}
-
-            {isFacilty && (
-              <>
-                <div className=" md:flex md:gap-5 grid grid-cols-1 gap-y-5">
-                  {JSON.parse(detailProduct.facility).map((item, i) => (
-                    <div
-                      key={i}
-                      className=" bg-blue-50 p-3 w-fit rounded-lg flex items-center gap-4"
-                    >
-                      <div className=" bg-blue-200 p-3 rounded-lg text-secondary"></div>
-                      <p className=" text-2xl font-semibold text-gray-600">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+          {activeTab === "benefit" && (
+            <>
+              <div className=" md:flex md:gap-5 grid grid-cols-1 gap-y-5">
+                {facilities.map((item, i) => (
+                  <div
+                    key={i}
+                    className=" bg-blue-50 p-3 w-fit rounded-lg flex items-center gap-4"
+                  >
+                    <div className=" bg-blue-200 p-3 rounded-lg text-secondary"></div>
+                    <p className=" text-2xl font-semibold text-gray-600">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
-    </>
+    </div>
+  );
+}
+
+function Info({ icon, label, value }) {
+  return (
+    <div className="flex items-start gap-3 bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+      <div className="text-yellow-300">{icon}</div>
+      <div>
+        <p className="text-xs text-gray-300">{label}</p>
+        <p className="text-sm font-semibold">{value}</p>
+      </div>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import { AiOutlineLoading } from "react-icons/ai";
 import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
 import HeroImage from "../assets/hero-image.png";
@@ -9,6 +10,7 @@ import CardProduct from "../components/CardProduct";
 
 export default function RegularTraining() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const seeProduct = useRef(null);
 
@@ -18,12 +20,11 @@ export default function RegularTraining() {
 
   useEffect(() => {
     axios
-      .get(
-        "https://api.ravatraacademy.id/index.php?route=products&type=RegularTraining"
-      )
+      .get("https://apiv2.ravatraacademy.id/api/products?type=RegularTraining")
       .then((res) => {
-        if (res.data.success) {
+        if (res.data.status === "success") {
           setProducts(res.data.data);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -34,11 +35,11 @@ export default function RegularTraining() {
   const today = new Date().toISOString().split("T")[0];
 
   const upcomingProducts = products.filter(
-    (product) => product.start_date > today
+    (product) => product.start_date > today,
   );
 
   const pastProducts = products.filter(
-    (product) => product.start_date <= today
+    (product) => product.start_date <= today,
   );
   return (
     <Container>
@@ -124,7 +125,14 @@ export default function RegularTraining() {
             Daftar Pelatihan yang Dibuka
           </h1>
 
-          {upcomingProducts.length > 0 ? (
+          {isLoading ? (
+            <div className=" flex items-center justify-center gap-4">
+              <div className=" animate-spin">
+                <AiOutlineLoading />
+              </div>
+              <p className=" font-semibold">Loading...</p>
+            </div>
+          ) : upcomingProducts.length > 0 ? (
             <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
               {upcomingProducts.map((product) => (
                 <CardProduct

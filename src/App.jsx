@@ -11,35 +11,28 @@ import ELearning from "./pages/ELearning";
 
 import DetailProduct from "./pages/DetailProduct";
 import CheckoutPage from "./pages/CheckoutPage";
-import AdminApproval from "./pages/AdminApproval";
 
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import LayoutDashboard from "./components/LayoutDashboard";
+import DashboardPage from "./pages/Admin/DashboardPage";
+import OrdersPage from "./pages/Admin/OrdersPage";
+import UsersPage from "./pages/Admin/UsersPage";
+import ProductsPage from "./pages/Admin/ProductsPage";
 
 const MainLayout = () => {
   const location = useLocation();
 
-  const hideNavbarLayout = [
-    "/checkoutproduct",
-    "/admin-approval",
-    "/login",
-    "/dashboard",
-  ];
+  const hideNavbarLayout = ["/checkoutproduct", "/login", "/dashboard"];
   return (
     <div className="min-h-screen flex flex-col">
       {!hideNavbarLayout.find((route) =>
-        location.pathname.startsWith(route)
+        location.pathname.startsWith(route),
       ) && <Navbar />}
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-
-          <Route
-            path="/admin-approval/:id/:userId"
-            element={<AdminApproval />}
-          />
 
           {/* product pages */}
           <Route path="/regulartraining" element={<RegularTraining />} />
@@ -52,42 +45,30 @@ const MainLayout = () => {
             element={<CheckoutPage />}
           />
 
-          {/* Detail pages */}
-          <Route
-            path="/regulartraining/detailproduct/:id"
-            element={<DetailProduct />}
-          />
-          <Route
-            path="/inhouse/detailproduct/:id"
-            element={<DetailProduct />}
-          />
-          <Route
-            path="/videotraining/detailproduct/:id"
-            element={<DetailProduct />}
-          />
-          <Route
-            path="/webinar/detailproduct/:id"
-            element={<DetailProduct />}
-          />
+          <Route path="/product/:id" element={<DetailProduct />} />
 
-          {/* Auth routes */}
+          {/* admin private*/}
           <Route path="/login" element={<Login />} />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <LayoutDashboard />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<DashboardPage />} />
+            <Route path="orders" element={<OrdersPage />} />
+            <Route path="users" element={<UsersPage />} />
+            <Route path="products" element={<ProductsPage />} />
+          </Route>
 
-          {/* Fallback */}
           <Route path="*" element={<LandingPage />} />
         </Routes>
       </main>
 
       {!hideNavbarLayout.find((route) =>
-        location.pathname.startsWith(route)
+        location.pathname.startsWith(route),
       ) && <Footer />}
     </div>
   );

@@ -20,7 +20,7 @@ export default function Kursus() {
 
   useEffect(() => {
     axios
-      .get("https://api.ravatraacademy.id/index.php?route=products&type=Kursus")
+      .get("https://apiv2.ravatraacademy.id/api/products?type=Kursus")
       .then((res) => {
         if (res.data.success) {
           setProducts(res.data.data);

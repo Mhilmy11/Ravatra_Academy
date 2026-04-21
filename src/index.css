@@ -1,24 +1,13 @@
 @import "tailwindcss";
 
-.bg-primary {
-    background-color: #F0B100;
-}
-
-.bg-secondary {
-    background-color: #000B76;
-}
-
-.text-primary {
-    color: #F0B100;
-}
-
-.text-secondary {
-    color: #000B76;
+@theme {
+  --color-primary: #F0B100;
+  --color-secondary: #000B76;
 }
 
 .scroll-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;    /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .marquee-container {
@@ -28,7 +17,7 @@
 
 .marquee {
   display: flex;
-  gap: 2.5rem; /* jarak antar logo, sesuai gap-10 Tailwind */
+  gap: 2.5rem;
   animation: marquee 10s linear infinite;
 }
 
@@ -42,5 +31,5 @@
 }
 
 .marquee img {
-  flex-shrink: 0; /* supaya gambar tidak mengecil */
+  flex-shrink: 0;
 }

@@ -17,9 +17,7 @@ export default function Seminar() {
 
   useEffect(() => {
     axios
-      .get(
-        "https://api.ravatraacademy.id/index.php?route=products&type=Webinar"
-      )
+      .get("https://apiv2.ravatraacademy.id/api/products?type=Webinar")
       .then((res) => {
         if (res.data.success) {
           setProducts(res.data.data);
@@ -32,10 +30,10 @@ export default function Seminar() {
 
   const today = new Date().toISOString().split("T")[0];
   const upcomingProducts = products.filter(
-    (product) => product.start_date > today
+    (product) => product.start_date > today,
   );
   const pastProducts = products.filter(
-    (product) => product.start_date <= today
+    (product) => product.start_date <= today,
   );
 
   const handleClickToProduct = () => {
