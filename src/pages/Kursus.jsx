@@ -1,5 +1,6 @@
 import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
+import { AiOutlineLoading } from "react-icons/ai";
 
 import HeroImage from "../assets/hero-image.png";
 import AboutImage from "../assets/kursus-about-image.jpg";
@@ -12,6 +13,8 @@ import CardProduct from "../components/CardProduct";
 
 export default function Kursus() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const seeProduct = useRef(null);
 
   const handleClickToProduct = () => {
@@ -22,14 +25,16 @@ export default function Kursus() {
     axios
       .get("https://apiv2.ravatraacademy.id/api/products?type=Kursus")
       .then((res) => {
-        if (res.data.success) {
+        if (res.data.status === "success") {
           setProducts(res.data.data);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
         console.error(err.message);
       });
   }, []);
+
   return (
     <Container>
       <div className=" md:px-20 px-5 w-full">

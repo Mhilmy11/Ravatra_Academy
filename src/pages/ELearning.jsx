@@ -14,6 +14,7 @@ import axios from "axios";
 import Container from "../components/Container";
 
 export default function ELearning() {
+  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const seeProduct = useRef(null);
@@ -34,14 +35,16 @@ export default function ELearning() {
     axios
       .get("https://apiv2.ravatraacademy.id/api/products?type=eLearning")
       .then((res) => {
-        if (res.data.success) {
+        if (res.data.status === "success") {
           setProducts(res.data.data);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
         console.error(err.message);
       });
   }, []);
+
   return (
     <Container>
       <div className=" md:px-20 px-5 w-full">
@@ -185,11 +188,7 @@ export default function ELearning() {
                       </p>
 
                       <button
-                        onClick={() =>
-                          navigate(
-                            `/regulartraining/detailproduct/${product.id}`,
-                          )
-                        }
+                        onClick={() => navigate(`/product/${product.id}`)}
                         className=" bg-secondary py-3.5 w-full font-semibold rounded-lg text-white cursor-pointer"
                       >
                         Daftar Sekarang

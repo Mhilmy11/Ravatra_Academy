@@ -1,5 +1,6 @@
 import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
+import { AiOutlineLoading } from "react-icons/ai";
 
 import HeroImage from "../assets/seminar-hero-image.png";
 import AboutImage from "../assets/seminar-about-image.jpg";
@@ -12,6 +13,7 @@ import CardProduct from "../components/CardProduct";
 
 export default function Seminar() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const seeProduct = useRef(null);
 
@@ -19,8 +21,9 @@ export default function Seminar() {
     axios
       .get("https://apiv2.ravatraacademy.id/api/products?type=Webinar")
       .then((res) => {
-        if (res.data.success) {
+        if (res.data.status === "success") {
           setProducts(res.data.data);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -127,7 +130,14 @@ export default function Seminar() {
               Daftar Pelatihan yang Dibuka
             </h1>
 
-            {upcomingProducts.length > 0 ? (
+            {isLoading ? (
+              <div className=" flex items-center justify-center gap-4">
+                <div className=" animate-spin">
+                  <AiOutlineLoading />
+                </div>
+                <p className=" font-semibold">Loading...</p>
+              </div>
+            ) : upcomingProducts.length > 0 ? (
               <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
                 {upcomingProducts.map((product) => (
                   <CardProduct
