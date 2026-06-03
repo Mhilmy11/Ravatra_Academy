@@ -17,26 +17,115 @@ import ElearningImage from "../assets/kursus-about-image.jpg";
 
 import Team01 from "../assets/teams-assets/team01.png";
 import Team02 from "../assets/teams-assets/team02.png";
-import Team03 from "../assets/teams-assets/team03.jpg";
 import Team04 from "../assets/teams-assets/team04.jpg";
 import Team05 from "../assets/teams-assets/team05.jpg";
 
-import NalaExplorer from "../assets/clients_assets/nala.png";
-import Knu from "../assets/clients_assets/Knu.jpg";
-import LdsGroup from "../assets/clients_assets/lds-group-black.png";
-import Minori from "../assets/clients_assets/logo-minori-300x136.webp";
-import Polyplex from "../assets/clients_assets/polyplex-logo.jpg";
-import AnakSehat from "../assets/clients_assets/pt-anak-sehat-idaman-hati.png";
-import Cataler from "../assets/clients_assets/pt-cataler-indonesia.png";
-import Hybrid from "../assets/clients_assets/pt-hybrid-power.png";
-import Hyundai from "../assets/clients_assets/pt-hyundai-elevator-indonesia.jpeg";
-import Nikawa from "../assets/clients_assets/pt-nikawa-textile-industry.png";
-import Penilai from "../assets/clients_assets/pt-penilai-harga-efek-indonesia-(PHEI).jpeg";
-import Sumbawa from "../assets/clients_assets/pt-sumbawa-timur.jpeg";
-import Vale from "../assets/clients_assets/pt-vale-indonesia.png";
-import Mastrada from "../assets/clients_assets/tokopedia-pt-mastrada.png";
-import Kopsurindo from "../assets/clients_assets/kopsurindo.png";
-import Pialite from "../assets/clients_assets/pialite.jpg";
+import Client1 from "../assets/clients_assets/knu.jpg";
+import Client2 from "../assets/clients_assets/kopsurindo.png";
+import Client3 from "../assets/clients_assets/lds-group-black.png";
+import Client4 from "../assets/clients_assets/logo-minori-300x136.webp";
+import Client5 from "../assets/clients_assets/nala.png";
+import Client6 from "../assets/clients_assets/pialite.jpg";
+import Client7 from "../assets/clients_assets/polyplex-logo.jpg";
+import Client8 from "../assets/clients_assets/pt-anak-sehat-idaman-hati.png";
+import Client9 from "../assets/clients_assets/pt-cataler-indonesia.png";
+import Client10 from "../assets/clients_assets/pt-hybrid-power.png";
+import Client11 from "../assets/clients_assets/pt-hyundai-elevator-indonesia.jpeg";
+import Client12 from "../assets/clients_assets/pt-nikawa-textile-industry.png";
+import Client13 from "../assets/clients_assets/pt-penilai-harga-efek-indonesia-(PHEI).jpeg";
+import Client14 from "../assets/clients_assets/pt-sumbawa-timur.jpeg";
+import Client15 from "../assets/clients_assets/pt-vale-indonesia.png";
+import Client16 from "../assets/clients_assets/tokopedia-pt-mastrada.png";
+
+const teams = [
+  {
+    name: "Rahmad Adam",
+    role: "MANAGING PARTNER",
+    image: Team01,
+  },
+  {
+    name: "Rheza Siswa Wiguna",
+    role: "TAX PARTNER",
+    image: Team02,
+  },
+  {
+    name: "Nofiah Mahdayani",
+    role: "ACCOUNT EXECUTIVE",
+    image: Team04,
+  },
+  {
+    name: "Sofie",
+    role: "ACCOUNT EXECUTIVE",
+    image: Team05,
+  },
+];
+
+const clients = [
+  {
+    image: Client2,
+    alt: "kopsurindo-image-client",
+  },
+  {
+    image: Client6,
+    alt: "pialite-image-client",
+  },
+  {
+    image: Client7,
+    alt: "polyplex-image-client",
+  },
+  {
+    image: Client8,
+    alt: "anak-sehat-idaman-hati-image-client",
+  },
+  {
+    image: Client9,
+    alt: "cataler-indonesia-image-client",
+  },
+  {
+    image: Client10,
+    alt: "hybrid-power-image-client",
+  },
+  {
+    image: Client11,
+    alt: "hyundai-elevator-indonesia-image-client",
+  },
+  {
+    image: Client5,
+    alt: "nala-image-client",
+  },
+  {
+    image: Client14,
+    alt: "sumbawa-timur-image-client",
+  },
+  {
+    image: Client3,
+    alt: "lds-group-image-client",
+  },
+  {
+    image: Client4,
+    alt: "minori-image-client",
+  },
+  {
+    image: Client12,
+    alt: "nikawa-textile-industry-image-client",
+  },
+  {
+    image: Client13,
+    alt: "penilai-harga-efek-indonesia-image-client",
+  },
+  {
+    image: Client15,
+    alt: "vale-indonesia-image-client",
+  },
+  {
+    image: Client16,
+    alt: "tokopedia-mastrada-image-client",
+  },
+  {
+    image: Client1,
+    alt: "knu-image-client",
+  },
+];
 
 export default function LandingPage() {
   const seeProduct = useRef(null);
@@ -52,7 +141,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <div className=" w-full my-10">
+      <div className=" w-full mb-10">
         <div className=" text-center font-semibold md:text-3xl">
           <h1 className=" md:text-5xl text-xl font-bold mb-3">
             Hi! Kami <span className=" text-yellow-500">Ravatra Academy</span>
@@ -141,83 +230,29 @@ export default function LandingPage() {
 
       <Container>
         <div className=" md:mx-20 mx-8">
-          <div className=" my-32">
+          <div className=" my-16 md:my-24">
             <h3 className=" md:text-5xl text-3xl font-semibold mb-14">
               Tim Kami
             </h3>
 
-            <div className=" flex justify-center gap-20 mb-14">
-              <div className=" font-semibold md:text-sm text-xs">
-                <div className=" flex justify-center w-full">
+            <div className=" grid grid-cols-1 md:grid-cols-4 justify-items-center space-y-5">
+              {teams.map((team, i) => (
+                <div key={i}>
                   <img
                     className=" w-48 mb-2 bg-yellow-500 rounded-full"
-                    src={Team01}
-                    alt="asset-team01"
+                    src={team.image}
+                    alt={team.name}
                   />
+                  <div className=" text-center">
+                    <p className=" text-lg font-semibold">{team.name}</p>
+                    <p className=" text-sm text-blue-800">{team.role}</p>
+                  </div>
                 </div>
-                <p className=" text-center">Rahmad Adam,</p>
-                <p>S.E., M.AK., AK., CA, CPA, BKP, CMT BNSP</p>
-              </div>
-
-              <div className=" font-semibold md:text-sm text-xs">
-                <div className=" flex justify-center w-full">
-                  <img
-                    className=" w-48 mb-2 bg-yellow-500 rounded-full"
-                    src={Team02}
-                    alt="asset-team02"
-                  />
-                </div>
-                <p className=" text-center">Rheza Siswa Wiguna,</p>
-                <p>S.Sos, CT, CMT, CPEC, CHt, CMEHt, CCEHt, BKP</p>
-              </div>
-            </div>
-
-            <div className=" flex justify-center gap-20">
-              <div className=" font-semibold text-sm">
-                <div className=" flex justify-center w-full">
-                  <img
-                    className=" w-48 mb-2 bg-yellow-500 rounded-full"
-                    src={Team03}
-                    alt="asset-team03"
-                  />
-                </div>
-                <p className=" text-center">Yetti Verdiani</p>
-                <p className=" text-secondary font-bold">
-                  Tax Training Development Program
-                </p>
-              </div>
-
-              <div className=" font-semibold text-sm">
-                <div className=" flex justify-center w-full">
-                  <img
-                    className=" w-48 mb-2 bg-yellow-500 rounded-full"
-                    src={Team04}
-                    alt="asset-team04"
-                  />
-                </div>
-                <p className=" text-center">Nofiah Mahdayani</p>
-                <p className=" text-secondary font-bold text-center">
-                  ACCOUNT EXECUTIVE
-                </p>
-              </div>
-
-              <div className=" font-semibold text-sm">
-                <div className=" flex justify-center w-full">
-                  <img
-                    className=" w-48 mb-2 bg-yellow-500 rounded-full"
-                    src={Team05}
-                    alt="asset-team05"
-                  />
-                </div>
-                <p className=" text-center">Sofie</p>
-                <p className=" text-secondary font-bold text-center">
-                  ACCOUNT EXECUTIVE
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
-          <div className=" my-40">
+          <div className=" my-16 md:my-24">
             <h1 className=" text-secondary md:text-xl text-lg font-bold text-center mb-4">
               PROGRAM UNGGULAN KAMI
             </h1>
@@ -303,7 +338,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className=" my-40">
+          <div className=" my-16 md:my-24">
             <h1 ref={seeProduct} className=" md:text-4xl text-xl font-bold">
               Pilihan Pelatihan{" "}
               <span className=" text-secondary underline">Ravatra Academy</span>
@@ -497,89 +532,12 @@ export default function LandingPage() {
               </h3>
             </div>
 
-            <div className=" mt-16 marquee-container">
-              <div className=" gap-10 marquee">
-                <img
-                  className="w-32 object-contain bg-black rounded-2xl p-2"
-                  src={NalaExplorer}
-                  alt="NalaExplorer-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={LdsGroup}
-                  alt="LdsGroup-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Minori}
-                  alt="Minori-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={AnakSehat}
-                  alt="AnakSehat-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Cataler}
-                  alt="Cataler-image-client"
-                />
-                <img
-                  className="w-[150px] object-contain"
-                  src={Kopsurindo}
-                  alt="Kopsurindo-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Hybrid}
-                  alt="Hybrid-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Hyundai}
-                  alt="Hyundai-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Polyplex}
-                  alt="Polyplex-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Penilai}
-                  alt="Penilai-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Sumbawa}
-                  alt="Sumbawa-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Vale}
-                  alt="Vale-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Mastrada}
-                  alt="Mastrada-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Knu}
-                  alt="Knu-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Nikawa}
-                  alt="Nikawa-image-client"
-                />
-                <img
-                  className="w-32 object-contain"
-                  src={Pialite}
-                  alt="pialite-image-client"
-                />
-              </div>
+            <div className=" grid grid-cols-2 md:grid-cols-8 place-items-center gap-y-10 md:gap-y-5 mt-10">
+              {clients.map((client, i) => (
+                <div key={i}>
+                  <img className=" w-24" src={client.image} alt={client.alt} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
