@@ -9,7 +9,9 @@ import { useNavigate } from "react-router";
 
 import Container from "../components/Container";
 import HeroImage from "../assets/landing-page-image.png";
+
 import ImageAbout from "../assets/image-about-section.png";
+
 import RegularTrainingImage from "../assets/regulartraining-card-image.jpeg";
 import WebinarImage from "../assets/webinar-card-image.jpg";
 import KursusImage from "../assets/in-house-about-image.jpg";
@@ -127,6 +129,33 @@ const clients = [
   },
 ];
 
+const products = [
+  {
+    title: "Regular Training",
+    image: RegularTrainingImage,
+    packages: ["Offline", "Full-Time", "1-2 Hari"],
+    body: "Kelas terjadwal dengan kurikulum komprehensif yang dapat diikuti secara rutin untuk pengembangan karir.",
+  },
+  {
+    title: "Webinar",
+    image: WebinarImage,
+    packages: ["Online", "Half-Time", "1 Hari"],
+    body: "Sesi berbagi ilmu terkini dari para pakar industri, sekaligus forum diskusi yang interaktif.",
+  },
+  {
+    title: "Kursus",
+    image: KursusImage,
+    packages: ["Offline", "Full-Time", "1-2 Hari"],
+    body: "Program pembelajaran intensif untuk meningkatkan kompetensi dalam bidang tertentu",
+  },
+  {
+    title: "e Learning",
+    image: ElearningImage,
+    packages: ["Online", "Full-Time", "14 Hari"],
+    body: "Program khusus yang dirancang sesuai kebutuhan spesifik perusahaan Anda untuk hasil optimal.",
+  },
+];
+
 export default function LandingPage() {
   const seeProduct = useRef(null);
   const navigate = useNavigate();
@@ -153,8 +182,12 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className=" flex justify-center mb-20">
-        <img src={HeroImage} alt="hero-image-page" />
+      <div className=" place-items-center mb-20">
+        <img
+          className=" w-[425px] md:w-[1000px]"
+          src={HeroImage}
+          alt="hero-image-page"
+        />
       </div>
 
       <div className=" bg-yellow-500 text-white">
@@ -220,7 +253,7 @@ export default function LandingPage() {
             </div>
 
             <img
-              className=" rounded-2xl md:block hidden"
+              className=" rounded-2xl md:block hidden w-[540px]"
               src={ImageAbout}
               alt="image-about-section"
             />
@@ -345,181 +378,50 @@ export default function LandingPage() {
             </h1>
 
             <div className=" snap-x overflow-x-auto flex gap-6 scroll-smooth scroll-hide py-10 px-10 rounded-xl">
-              <div className=" snap-start shrink-0 scroll-ml-5 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
-                <img
-                  className=" w-[300px] h-[205px] rounded-lg"
-                  src={RegularTrainingImage}
-                  alt="regulartraining-card-image"
-                />
+              {products.map((product, i) => (
+                <div
+                  key={i}
+                  className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300"
+                >
+                  <img
+                    className=" w-[300px] h-[205px] rounded-lg"
+                    src={product.image}
+                    alt="regulartraining-card-image"
+                  />
 
-                <h2 className=" font-bold text-xl py-6">Regular Training</h2>
+                  <h2 className=" font-bold text-xl py-6">{product.title}</h2>
 
-                <div className=" pt-3">
-                  <div className=" flex gap-1">
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Offline
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Full-time
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      1-2 Hari
-                    </p>
+                  <div className=" pt-3">
+                    <div className=" flex gap-1">
+                      {product.packages.map((item, idx) => (
+                        <p
+                          key={idx}
+                          className=" border w-fit px-3 py-2 rounded-full text-sm"
+                        >
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+
+                    <p className=" text-sm py-4">{product.body}</p>
                   </div>
 
-                  <p className=" text-sm py-4">
-                    Kelas terjadwal dengan kurikulum komprehensif yang dapat
-                    diikuti secara rutin untuk pengembangan karir.
-                  </p>
-                </div>
-
-                <div className=" pt-2 text-lg font-semibold">
-                  <button
-                    onClick={() => openLink("https://wa.me/6281214277869")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
-                  >
-                    <BsWhatsapp /> Hubungi Kami
-                  </button>
-                  <button
-                    onClick={() => navigate("/regulartraining")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center w-full rounded-lg py-3 border-2 border-slate-300 hover:border-blue-900 transition mt-2"
-                  >
-                    Lihat Pelatihan Detail
-                  </button>
-                </div>
-              </div>
-
-              <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
-                <img
-                  className=" w-[300px] h-[205px] rounded-lg"
-                  src={WebinarImage}
-                  alt="webinar-card-image"
-                />
-
-                <h2 className=" font-bold text-xl py-6">Webinar</h2>
-
-                <div className=" pt-3">
-                  <div className=" flex gap-1">
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Online
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Half-time
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      1 Hari
-                    </p>
+                  <div className=" pt-2 text-lg font-semibold">
+                    <button
+                      onClick={() => openLink("https://wa.me/6281214277869")}
+                      className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
+                    >
+                      <BsWhatsapp /> Hubungi Kami
+                    </button>
+                    <button
+                      onClick={() => navigate("/regulartraining")}
+                      className=" cursor-pointer flex gap-4 items-center justify-center w-full rounded-lg py-3 border-2 border-slate-300 hover:border-blue-900 transition mt-2"
+                    >
+                      Lihat Pelatihan Detail
+                    </button>
                   </div>
-
-                  <p className=" text-sm py-4">
-                    Sesi berbagi ilmu terkini dari para pakar industri,
-                    sekaligus forum diskusi yang interaktif.
-                  </p>
                 </div>
-
-                <div className=" pt-2 text-lg font-semibold">
-                  <button
-                    onClick={() => openLink("https://wa.me/6281214277869")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
-                  >
-                    <BsWhatsapp /> Hubungi Kami
-                  </button>
-                  <button
-                    onClick={() => navigate("/seminar")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center w-full rounded-lg py-3 border-2 border-slate-300 hover:border-blue-900 transition mt-2"
-                  >
-                    Lihat Pelatihan Detail
-                  </button>
-                </div>
-              </div>
-
-              <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
-                <img
-                  className=" w-[300px] h-[205px] rounded-lg"
-                  src={KursusImage}
-                  alt="kursus-card-image"
-                />
-
-                <h2 className=" font-bold text-xl py-6">Kursus</h2>
-
-                <div className=" pt-3">
-                  <div className=" flex gap-1">
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Offline
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Full-time
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      1-2 Hari
-                    </p>
-                  </div>
-
-                  <p className=" text-sm py-4">
-                    Program pembelajaran intensif untuk meningkatkan kompetensi
-                    dalam bidang tertentu
-                  </p>
-                </div>
-
-                <div className=" pt-2 text-lg font-semibold">
-                  <button
-                    onClick={() => openLink("https://wa.me/6281214277869")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
-                  >
-                    <BsWhatsapp /> Hubungi Kami
-                  </button>
-                  <button
-                    onClick={() => navigate("/kursus")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center w-full rounded-lg py-3 border-2 border-slate-300 hover:border-blue-900 transition mt-2"
-                  >
-                    Lihat Pelatihan Detail
-                  </button>
-                </div>
-              </div>
-
-              <div className=" snap-start shrink-0 bg-white w-[320px] rounded-xl p-4 shadow-lg shadow-blue-300">
-                <img
-                  className=" w-[300px] h-[205px] rounded-lg"
-                  src={ElearningImage}
-                  alt="elearning-card-image"
-                />
-
-                <h2 className=" font-bold text-xl py-6">e Learning</h2>
-
-                <div className=" pt-3">
-                  <div className=" flex gap-1">
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Online
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      Full-time
-                    </p>
-                    <p className=" border w-fit px-3 py-2 rounded-full text-sm">
-                      14 Hari
-                    </p>
-                  </div>
-
-                  <p className=" text-sm py-4">
-                    Program khusus yang dirancang sesuai kebutuhan spesifik
-                    perusahaan Anda untuk hasil optimal.
-                  </p>
-                </div>
-
-                <div className=" pt-2 text-lg font-semibold">
-                  <button
-                    onClick={() => openLink("https://wa.me/6281214277869")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
-                  >
-                    <BsWhatsapp /> Hubungi Kami
-                  </button>
-                  <button
-                    onClick={() => navigate("/elearning")}
-                    className=" cursor-pointer flex gap-4 items-center justify-center w-full rounded-lg py-3 border-2 border-slate-300 hover:border-blue-900 transition mt-2"
-                  >
-                    Lihat Pelatihan Detail
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
