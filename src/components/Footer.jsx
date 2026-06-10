@@ -1,7 +1,7 @@
 import { BsInstagram } from "react-icons/bs";
 import { SlSocialFacebook } from "react-icons/sl";
 import { SlSocialLinkedin } from "react-icons/sl";
-import LogoRavatra from "../assets/logo-only-ravatra-academy-nobg.png";
+import LogoRavatra from "../assets/logo-only-ravatra-academy-nobg.webp";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import Container from "./Container";

@@ -1,6 +1,6 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router";
-import RavatraLogoNavbar from "../assets/logo-only-ravatra-academy-nobg.png";
+import RavatraLogoNavbar from "../assets/logo-only-ravatra-academy-nobg.webp";
 import { useState } from "react";
 import Container from "./Container";
 
