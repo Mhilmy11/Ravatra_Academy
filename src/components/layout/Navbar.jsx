@@ -1,8 +1,8 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router";
-import RavatraLogoNavbar from "../assets/logo-only-ravatra-academy-nobg.webp";
+import RavatraLogoNavbar from "../../assets/logo-only-ravatra-academy-nobg.webp";
 import { useState } from "react";
-import Container from "./Container";
+import Container from "../Container";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -12,10 +12,11 @@ export default function Navbar() {
 
   const page = [
     { label: "Beranda", path: "/" },
-    { label: "Regular Training", path: "/regulartraining" },
-    { label: "Webinar", path: "/seminar" },
-    { label: "Kursus", path: "/kursus" },
-    { label: "e-Learning", path: "/elearning" },
+    { label: "Regular Training", path: "/products/regular-training" },
+    { label: "Brevet", path: "/products/brevet" },
+    { label: "Webinar", path: "/products/seminar" },
+    { label: "Kursus", path: "/products/kursus" },
+    { label: "e-Learning", path: "/products/elearning" },
   ];
 
   const handleNavigation = (path) => {

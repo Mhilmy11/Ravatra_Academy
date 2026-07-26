@@ -2,14 +2,14 @@ import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
 import { AiOutlineLoading } from "react-icons/ai";
 
-import HeroImage from "../assets/hero-image.png";
-import AboutImage from "../assets/kursus-about-image.jpg";
+import HeroImage from "../../assets/hero-image.png";
+import AboutImage from "../../assets/kursus-about-image.jpg";
 
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-import Container from "../components/Container";
-import CardProduct from "../components/CardProduct";
+import Container from "../../components/Container";
+import CardProduct from "../../components/CardProduct";
 
 export default function Kursus() {
   const [products, setProducts] = useState([]);

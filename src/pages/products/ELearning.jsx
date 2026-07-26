@@ -3,15 +3,15 @@ import { RiComputerLine } from "react-icons/ri";
 import { BsClock } from "react-icons/bs";
 import { FiUsers, FiMapPin } from "react-icons/fi";
 
-import HeroImage from "../assets/in-house-hero-image.png";
-import AboutImage from "../assets/in-house-about-image.jpg";
-import CardImage from "../assets/card-image-test.png";
+import HeroImage from "../../assets/in-house-hero-image.png";
+import AboutImage from "../../assets/in-house-about-image.jpg";
+import CardImage from "../../assets/card-image-test.png";
 
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-import Container from "../components/Container";
+import Container from "../../components/Container";
 
 export default function ELearning() {
   const [isLoading, setIsLoading] = useState(true);

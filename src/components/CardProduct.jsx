@@ -6,26 +6,23 @@ import CardImage from "../assets/card-image-test.png";
 
 import { useNavigate } from "react-router";
 
-export default function CardProduct({ product, showButton }) {
+export default function CardProduct({ product, type, showButton = true }) {
   const navigate = useNavigate();
 
-  const formatRupiah = (value) => {
+  const formatRupiah = (price) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
-    }).format(value);
+    }).format(price);
   };
   return (
     <>
-      <div
-        key={product.id}
-        className="max-w-sm bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden border border-gray-200"
-      >
+      <div className="max-w-sm bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden border border-gray-200">
         <div className="relative h-48">
           <img
-            src="https://images.unsplash.com/photo-1557804483-ef3ae78eca57"
-            alt="Program Training"
+            src={`https://apiv2.ravatraacademy.id/${product.thumbnail}`}
+            alt={product.product_name}
             className="w-full h-full object-cover"
           />
 
@@ -34,11 +31,6 @@ export default function CardProduct({ product, showButton }) {
           <span className="absolute top-3 left-3 bg-yellow-500 text-white text-xs px-3 py-1 rounded-full shadow">
             {product.product_type}
           </span>
-
-          <div className="absolute bottom-3 left-3 text-white">
-            <p className="text-xs opacity-80">Pembicara</p>
-            <p className="font-semibold text-sm">{product.pembicara}</p>
-          </div>
         </div>
 
         <div className="p-4">
@@ -46,7 +38,7 @@ export default function CardProduct({ product, showButton }) {
             {product.product_name}
           </h3>
 
-          <div className="space-y-1 text-sm text-gray-600">
+          <div className="space-y-2 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <BiCalendar size={16} className="text-blue-500" />
               <span>{product.schedule}</span>
@@ -62,17 +54,16 @@ export default function CardProduct({ product, showButton }) {
               <span>{product.start_end_time}</span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <FiUsers size={16} className="text-purple-500" />
-              <span>{product.pendaftar}</span>
-            </div>
+            {product.start_date && (
+              <div className="flex items-center gap-2">
+                <FiUsers size={16} className="text-purple-500" />
+                <span>{product.start_date}</span>
+              </div>
+            )}
           </div>
 
           <div className="mt-4 flex items-end justify-between">
             <div>
-              <p className="text-xs line-through text-gray-500">
-                {formatRupiah(product.discount)}
-              </p>
               <p className="text-xl font-bold text-blue-800">
                 {formatRupiah(product.product_price)}
               </p>
@@ -80,8 +71,8 @@ export default function CardProduct({ product, showButton }) {
 
             {showButton && (
               <button
-                onClick={() => navigate(`/product/${product.id}`)}
-                className=" cursor-pointer px-4 py-2 bg-secondary text-white rounded-lg hover:bg-blue-800 transition"
+                onClick={() => navigate(`/products/${type}/${product.slug}`)}
+                className="cursor-pointer px-4 py-2 bg-secondary text-white rounded-lg hover:bg-blue-800 transition"
               >
                 Daftar
               </button>

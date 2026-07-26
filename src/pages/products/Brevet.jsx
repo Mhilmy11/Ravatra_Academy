@@ -1,14 +1,14 @@
 import { AiOutlineLoading } from "react-icons/ai";
 import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
-import HeroImage from "../assets/hero-image.png";
-import AboutImage from "../assets/image-about.png";
+import HeroImage from "../../assets/hero-image.png";
+import AboutImage from "../../assets/image-about.png";
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import Container from "../components/Container";
-import CardProduct from "../components/CardProduct";
+import axios from "../../services/axios";
+import Container from "../../components/Container";
+import CardProduct from "../../components/CardProduct";
 
-export default function RegularTraining() {
+export default function Brevet() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,18 +18,26 @@ export default function RegularTraining() {
     seeProduct.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(() => {
-    axios
-      .get("https://apiv2.ravatraacademy.id/api/products?type=RegularTraining")
-      .then((res) => {
-        if (res.data.status === "success") {
-          setProducts(res.data.data);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err.message);
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/products", {
+        params: {
+          type: "BREVET",
+        },
       });
+
+      if (response.data.success) {
+        setProducts(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   const today = new Date().toISOString().split("T")[0];
@@ -136,9 +144,9 @@ export default function RegularTraining() {
             <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
               {upcomingProducts.map((product) => (
                 <CardProduct
-                  key={product.id}
+                  key={product.product_code}
                   product={product}
-                  showButton={true}
+                  type="brevet"
                 />
               ))}
             </div>
