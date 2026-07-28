@@ -3,10 +3,10 @@ import { RiComputerLine } from "react-icons/ri";
 import { AiOutlineLoading } from "react-icons/ai";
 
 import HeroImage from "../../assets/hero-image.png";
-import AboutImage from "../../assets/kursus-about-image.jpg";
+import AboutImage from "../../assets/image-about-kursus.jpg";
 
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import axios from "../../services/axios";
 
 import Container from "../../components/Container";
 import CardProduct from "../../components/CardProduct";
@@ -21,19 +21,37 @@ export default function Kursus() {
     seeProduct.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(() => {
-    axios
-      .get("https://apiv2.ravatraacademy.id/api/products?type=Kursus")
-      .then((res) => {
-        if (res.data.status === "success") {
-          setProducts(res.data.data);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err.message);
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/products", {
+        params: {
+          type: "KURSUS",
+        },
       });
+
+      if (response.data.success) {
+        setProducts(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const upcomingProducts = products.filter(
+    (product) => product.start_date > today,
+  );
+
+  const pastProducts = products.filter(
+    (product) => product.start_date <= today,
+  );
 
   return (
     <Container>
@@ -116,19 +134,48 @@ export default function Kursus() {
             Daftar Pelatihan yang Dibuka
           </h1>
 
-          {products && products.length > 0 ? (
+          {isLoading ? (
+            <div className=" flex items-center justify-center gap-4">
+              <div className=" animate-spin">
+                <AiOutlineLoading />
+              </div>
+              <p className=" font-semibold">Loading...</p>
+            </div>
+          ) : upcomingProducts.length > 0 ? (
             <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
-              {products.map((product) => (
+              {upcomingProducts.map((product) => (
                 <CardProduct
-                  key={product.id}
+                  key={product.product_code}
                   product={product}
-                  showButton={true}
+                  type="kursus"
                 />
               ))}
             </div>
           ) : (
             <div className=" text-center text-slate-400">
               ... Tidak ada pelatihan mendatang ...
+            </div>
+          )}
+        </div>
+
+        <div className=" mt-20">
+          <h1 className=" font-bold md:text-3xl text-xl mb-5">
+            Pelatihan Yang Sudah Dijalani
+          </h1>
+
+          {pastProducts.length > 0 ? (
+            <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
+              {pastProducts.map((product) => (
+                <CardProduct
+                  key={product.id}
+                  product={product}
+                  showButton={false}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className=" text-center text-slate-400">
+              ... Belum ada pelatihan yang selesai ...
             </div>
           )}
         </div>

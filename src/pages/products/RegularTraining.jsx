@@ -2,7 +2,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { BiBookOpen, BiVideo } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
 import HeroImage from "../../assets/hero-image.png";
-import AboutImage from "../../assets/image-about.png";
+import AboutImage from "../../assets/image-about-regulartraining.jpg";
 import { useEffect, useState, useRef } from "react";
 import axios from "../../services/axios";
 import Container from "../../components/Container";

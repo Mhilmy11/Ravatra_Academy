@@ -2,48 +2,58 @@ import { BiBookOpen, BiVideo, BiCalendar } from "react-icons/bi";
 import { RiComputerLine } from "react-icons/ri";
 import { BsClock } from "react-icons/bs";
 import { FiUsers, FiMapPin } from "react-icons/fi";
+import { AiOutlineLoading } from "react-icons/ai";
 
 import HeroImage from "../../assets/in-house-hero-image.png";
-import AboutImage from "../../assets/in-house-about-image.jpg";
-import CardImage from "../../assets/card-image-test.png";
+import AboutImage from "../../assets/image-about-elearning.jpg";
 
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router";
-import axios from "axios";
+import axios from "../../services/axios";
 
 import Container from "../../components/Container";
+import CardProduct from "../../components/CardProduct";
 
 export default function ELearning() {
-  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
   const seeProduct = useRef(null);
 
   const handleClickToProduct = () => {
     seeProduct.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const formatRupiah = (value) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(value);
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/products", {
+        params: {
+          type: "E_LEARNING",
+        },
+      });
+
+      if (response.data.success) {
+        setProducts(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    axios
-      .get("https://apiv2.ravatraacademy.id/api/products?type=eLearning")
-      .then((res) => {
-        if (res.data.status === "success") {
-          setProducts(res.data.data);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
+    fetchProducts();
   }, []);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const upcomingProducts = products.filter(
+    (product) => product.start_date > today,
+  );
+
+  const pastProducts = products.filter(
+    (product) => product.start_date <= today,
+  );
 
   return (
     <Container>
@@ -127,75 +137,21 @@ export default function ELearning() {
             Daftar Pelatihan yang Dibuka
           </h1>
 
-          {products && products.length > 0 ? (
+          {isLoading ? (
+            <div className=" flex items-center justify-center gap-4">
+              <div className=" animate-spin">
+                <AiOutlineLoading />
+              </div>
+              <p className=" font-semibold">Loading...</p>
+            </div>
+          ) : upcomingProducts.length > 0 ? (
             <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className=" bg-gray-100 rounded-xl px-2.5 py-2.5"
-                >
-                  <div>
-                    <div className="relative">
-                      <img
-                        src={CardImage}
-                        alt="card-image-product"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-
-                      <div className="absolute inset-0 flex items-end rounded-lg">
-                        <div className="p-6 text-white">
-                          <h2 className=" font-semibold text-xl">
-                            {product.product_name}
-                          </h2>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className=" px-1 mt-3.5">
-                      <div className=" grid grid-cols-2 gap-y-3.5 text-xs my-3.5">
-                        <div className=" flex items-center gap-1">
-                          <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                            <FiMapPin size={15} />
-                          </div>
-                          <p className=" text-neutral-500">
-                            {product.location}
-                          </p>
-                        </div>
-
-                        <div className=" flex items-center gap-1">
-                          <div className=" bg-blue-200 text-blue-950 p-1 rounded-lg">
-                            <FiUsers size={15} />
-                          </div>
-                          <p className=" text-neutral-500">
-                            {product.pendaftar}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className=" h-0.5 bg-gray-300 rounded-full"></div>
-
-                      <p className=" font-bold text-[22px] my-3.5">
-                        <div>
-                          <p className=" text-xs font-normal">EarlyBird :</p>
-                        </div>
-
-                        <div className=" flex items-center gap-1.5">
-                          <p>{formatRupiah(product.product_price)}</p>
-                          <p className=" text-sm font-light line-through">
-                            {product.dummy_discount}
-                          </p>
-                        </div>
-                      </p>
-
-                      <button
-                        onClick={() => navigate(`/product/${product.id}`)}
-                        className=" bg-secondary py-3.5 w-full font-semibold rounded-lg text-white cursor-pointer"
-                      >
-                        Daftar Sekarang
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              {upcomingProducts.map((product) => (
+                <CardProduct
+                  key={product.product_code}
+                  product={product}
+                  type="elearning"
+                />
               ))}
             </div>
           ) : (

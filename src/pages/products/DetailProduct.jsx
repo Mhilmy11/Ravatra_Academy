@@ -45,10 +45,6 @@ export default function DetailProduct() {
       maximumFractionDigits: 0,
     });
 
-  const imageUrl = product?.thumbnail
-    ? `https://apiv2.ravatraacademy.id/${product.thumbnail}`
-    : "/images/no-image.png";
-
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gray-50">
@@ -67,20 +63,15 @@ export default function DetailProduct() {
 
   return (
     <div className="bg-gray-50">
-      {/* HERO */}
       <section className="max-w-7xl mx-auto px-5 py-12">
         <div className="grid lg:grid-cols-2 gap-10">
-          {/* IMAGE */}
-
           <div>
             <img
-              src={imageUrl}
-              alt={product.product_name}
+              src={product.thumbnail}
+              alt={product.slug}
               className="rounded-2xl shadow-lg w-full"
             />
           </div>
-
-          {/* INFO */}
 
           <div>
             {product.is_featured == 1 && (
@@ -93,10 +84,6 @@ export default function DetailProduct() {
             <h1 className="text-4xl font-bold text-gray-800 mt-5">
               {product.product_name}
             </h1>
-
-            <p className="text-gray-600 mt-5 leading-8">
-              {product.description}
-            </p>
 
             <div className="mt-8">
               <p className="text-gray-500 text-sm">Investment</p>
@@ -180,11 +167,14 @@ Terima kasih.`,
         </div>
       </section>
 
-      {/* CONTENT */}
-
       <section className="max-w-7xl mx-auto px-5 py-12 space-y-8">
         <ContentCard icon={<FaBookOpen />} title="About This Training">
-          <p className="leading-8 text-gray-700">{product.description}</p>
+          <div
+            className="leading-8 text-gray-700"
+            dangerouslySetInnerHTML={{
+              __html: product.description,
+            }}
+          />
         </ContentCard>
 
         <ContentCard icon={<FaBookOpen />} title="Learning Outline">

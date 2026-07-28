@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router";
 
-import RegularTrainingImage from "../../assets/regulartraining-card-image.webp";
-import WebinarImage from "../../assets/webinar-card-image.webp";
-import KursusImage from "../../assets/in-house-about-image.jpg";
-import ElearningImage from "../../assets/kursus-about-image.jpg";
+import RegularTrainingImage from "../../assets/image-about-regulartraining.jpg";
+import BrevetImage from "../../assets/image-about-brevet.jpg";
+import WebinarImage from "../../assets/image-about-webinar.jpg";
+import KursusImage from "../../assets/image-about-kursus.jpg";
+import ElearningImage from "../../assets/image-about-elearning.jpg";
 
 import { BsWhatsapp } from "react-icons/bs";
 import LazyImage from "../../shared/LazyImage";
@@ -18,7 +19,7 @@ const products = [
   },
   {
     title: "Brevet",
-    image: RegularTrainingImage,
+    image: BrevetImage,
     navigate: "/products/brevet",
     packages: ["Offline", "Full-Time", "1-2 Hari"],
     body: "Kelas terjadwal dengan kurikulum komprehensif yang dapat diikuti secara rutin untuk pengembangan karir.",

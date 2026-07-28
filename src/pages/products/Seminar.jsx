@@ -3,10 +3,10 @@ import { RiComputerLine } from "react-icons/ri";
 import { AiOutlineLoading } from "react-icons/ai";
 
 import HeroImage from "../../assets/seminar-hero-image.png";
-import AboutImage from "../../assets/seminar-about-image.jpg";
+import AboutImage from "../../assets/image-about-webinar.jpg";
 
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import axios from "../../services/axios";
 
 import Container from "../../components/Container";
 import CardProduct from "../../components/CardProduct";
@@ -17,31 +17,42 @@ export default function Seminar() {
 
   const seeProduct = useRef(null);
 
-  useEffect(() => {
-    axios
-      .get("https://apiv2.ravatraacademy.id/api/products?type=Webinar")
-      .then((res) => {
-        if (res.data.status === "success") {
-          setProducts(res.data.data);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err.message);
+  const handleClickToProduct = () => {
+    seeProduct.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/products", {
+        params: {
+          type: "WEBINAR",
+        },
       });
+
+      if (response.data.success) {
+        setProducts(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   const today = new Date().toISOString().split("T")[0];
+
   const upcomingProducts = products.filter(
     (product) => product.start_date > today,
   );
+
   const pastProducts = products.filter(
     (product) => product.start_date <= today,
   );
 
-  const handleClickToProduct = () => {
-    seeProduct.current?.scrollIntoView({ behavior: "smooth" });
-  };
   return (
     <>
       <Container>
@@ -141,9 +152,9 @@ export default function Seminar() {
               <div className=" grid md:grid-cols-3 grid-cols-1 gap-10">
                 {upcomingProducts.map((product) => (
                   <CardProduct
-                    key={product.id}
+                    key={product.product_code}
                     product={product}
-                    showButton={true}
+                    type="webinar"
                   />
                 ))}
               </div>

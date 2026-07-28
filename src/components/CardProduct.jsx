@@ -2,8 +2,6 @@ import { FiUsers, FiMapPin } from "react-icons/fi";
 import { BsClock } from "react-icons/bs";
 import { BiCalendar } from "react-icons/bi";
 
-import CardImage from "../assets/card-image-test.png";
-
 import { useNavigate } from "react-router";
 
 export default function CardProduct({ product, type, showButton = true }) {
@@ -21,7 +19,7 @@ export default function CardProduct({ product, type, showButton = true }) {
       <div className="max-w-sm bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden border border-gray-200">
         <div className="relative h-48">
           <img
-            src={`https://apiv2.ravatraacademy.id/${product.thumbnail}`}
+            src={product.thumbnail}
             alt={product.product_name}
             className="w-full h-full object-cover"
           />
