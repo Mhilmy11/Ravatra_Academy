@@ -107,7 +107,7 @@ Terima kasih.`,
                   );
 
                   window.open(
-                    `https://wa.me/6281214277859?text=${message}`,
+                    `https://wa.me/${product.phone_admin}?text=${message}`,
                     "_blank",
                   );
                 }}

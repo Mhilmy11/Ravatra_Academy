@@ -87,7 +87,7 @@ export default function OurProducts({ seeProduct }) {
 
             <div className=" pt-2 text-lg font-semibold">
               <button
-                onClick={() => openLink("https://wa.me/6281214277869")}
+                onClick={() => openLink("https://wa.me/6281214277839")}
                 className=" cursor-pointer flex gap-4 items-center justify-center py-3 text-white rounded-lg bg-green-500 hover:bg-green-400 transition w-full"
               >
                 <BsWhatsapp /> Hubungi Kami
