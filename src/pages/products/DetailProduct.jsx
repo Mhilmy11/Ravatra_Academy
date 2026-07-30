@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "../../services/axios";
 
@@ -44,6 +44,20 @@ export default function DetailProduct() {
       currency: "IDR",
       maximumFractionDigits: 0,
     });
+
+  const WhatsappLinked = () => {
+    const message = encodeURIComponent(
+      `Halo Ravatra Academy,
+
+Saya tertarik mengikuti program ${product.product_name}.
+
+Mohon informasi mengenai pendaftarannya.
+
+Terima kasih.`,
+    );
+
+    return `https://wa.me/${product.phone_admin}?text=${message}`;
+  };
 
   if (loading) {
     return (
@@ -94,28 +108,14 @@ export default function DetailProduct() {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <button
-                onClick={() => {
-                  const message = encodeURIComponent(
-                    `Halo Ravatra Academy,
-
-Saya tertarik mengikuti program ${product.product_name}.
-
-Mohon informasi mengenai pendaftarannya.
-
-Terima kasih.`,
-                  );
-
-                  window.open(
-                    `https://wa.me/${product.phone_admin}?text=${message}`,
-                    "_blank",
-                  );
-                }}
+              <a
+                href={WhatsappLinked()}
+                target="_blank"
                 className="bg-[#000B76] hover:bg-blue-900 text-white px-8 py-4 rounded-xl flex items-center gap-3 font-semibold"
               >
                 <FaWhatsapp />
                 Chat Admin Whatsapp
-              </button>
+              </a>
 
               {/* <a
                 href={product.package_link}
