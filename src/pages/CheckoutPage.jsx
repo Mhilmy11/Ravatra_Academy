@@ -350,20 +350,20 @@ export default function CheckoutPage() {
               </p>
             </div>
 
-            {/* Bank */}
             <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
               <p className="text-sm text-gray-500">Transfer ke</p>
 
               <p className="mt-2 text-lg font-bold text-gray-900">Bank BCA</p>
 
               <p className="mt-1 text-2xl font-bold tracking-wide text-gray-900">
-                1234567890
+                5375375432
               </p>
 
-              <p className="mt-1 text-sm text-gray-500">a.n. Ravatra Academy</p>
+              <p className="mt-1 text-sm text-gray-500">
+                a.n. Ravatra Akademi Indonesia
+              </p>
             </div>
 
-            {/* Total */}
             <div className="mt-5 flex items-center justify-between gap-4 rounded-xl bg-blue-50 border border-blue-100 p-4">
               <span className="text-sm font-medium text-gray-700">
                 Total Pembayaran
@@ -374,7 +374,6 @@ export default function CheckoutPage() {
               </span>
             </div>
 
-            {/* Upload */}
             <div className="mt-6">
               <label
                 htmlFor="payment-proof"
@@ -416,14 +415,12 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* Error */}
             {paymentError && (
               <div className="mt-5 p-4 rounded-xl bg-red-50 border border-red-100">
                 <p className="text-sm text-red-600">{paymentError}</p>
               </div>
             )}
 
-            {/* Submit */}
             <button
               type="button"
               onClick={handlePaymentSubmit}
