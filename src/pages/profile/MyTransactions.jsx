@@ -112,7 +112,9 @@ export default function MyTransactions() {
         },
       );
 
-      const blob = new Blob([response.data], { type: "application/pdf" });
+      const blob = new Blob([response.data], {
+        type: "application/pdf",
+      });
 
       const url = window.URL.createObjectURL(blob);
 
