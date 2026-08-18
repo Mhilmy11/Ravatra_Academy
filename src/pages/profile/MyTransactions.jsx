@@ -99,12 +99,38 @@ export default function MyTransactions() {
     setSelectedTransaction(transaction);
   };
 
-  const handleDownloadInvoice = (transaction) => {
-    if (!transaction.invoice_path) {
+  const handleDownloadInvoice = async (transaction) => {
+    if (!transaction.invoice_number) {
       return;
     }
 
-    window.open(transaction.invoice_path, "_blank");
+    try {
+      const response = await api.get(
+        `/account/transactions/${transaction.transaction_code}/invoice`,
+        {
+          responseType: "blob",
+        },
+      );
+
+      const blob = new Blob([response.data], { type: "application/pdf" });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = `${transaction.invoice_number}.pdf`;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Failed to download invoice:", error);
+    }
   };
 
   if (loading) {
@@ -134,7 +160,6 @@ export default function MyTransactions() {
   return (
     <>
       <div>
-        {/* Header */}
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-slate-800">
             My Transactions
@@ -145,7 +170,6 @@ export default function MyTransactions() {
           </p>
         </div>
 
-        {/* Empty State */}
         {transactions.length === 0 && (
           <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
             <h3 className="text-lg font-semibold text-slate-800">
@@ -158,7 +182,6 @@ export default function MyTransactions() {
           </div>
         )}
 
-        {/* Transaction List */}
         {transactions.length > 0 && (
           <div className="space-y-4">
             {transactions.map((transaction) => (
@@ -166,7 +189,6 @@ export default function MyTransactions() {
                 key={transaction.id}
                 className="rounded-2xl bg-white p-5 shadow-sm transition hover:shadow-md sm:p-6"
               >
-                {/* Card Header */}
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
@@ -187,7 +209,6 @@ export default function MyTransactions() {
                   </span>
                 </div>
 
-                {/* Product */}
                 <div className="mt-5">
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                     Product
@@ -202,7 +223,6 @@ export default function MyTransactions() {
                   </p>
                 </div>
 
-                {/* Information */}
                 <div className="mt-5 grid gap-4 border-t border-slate-100 pt-5 sm:grid-cols-2">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
@@ -225,7 +245,6 @@ export default function MyTransactions() {
                   </div>
                 </div>
 
-                {/* Actions */}
                 {(transaction.status === "PAID" ||
                   transaction.status === "REJECTED") && (
                   <div className="mt-5 flex flex-col gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:justify-end">
@@ -256,11 +275,9 @@ export default function MyTransactions() {
         )}
       </div>
 
-      {/* Detail Modal */}
       {selectedTransaction && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 py-6">
           <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white shadow-xl">
-            {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 sm:px-6">
               <div>
                 <h3 className="text-lg font-semibold text-slate-800">
@@ -281,7 +298,6 @@ export default function MyTransactions() {
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="space-y-5 px-5 py-6 sm:px-6">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
@@ -347,7 +363,6 @@ export default function MyTransactions() {
                 </span>
               </div>
 
-              {/* Reject Reason */}
               {selectedTransaction.status === "REJECTED" &&
                 selectedTransaction.reject_reason && (
                   <div className="rounded-lg border border-red-200 bg-red-50 p-4">
@@ -361,7 +376,6 @@ export default function MyTransactions() {
                   </div>
                 )}
 
-              {/* Invoice */}
               {selectedTransaction.invoice_number && (
                 <div>
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
@@ -375,7 +389,6 @@ export default function MyTransactions() {
               )}
             </div>
 
-            {/* Modal Footer */}
             <div className="border-t border-slate-200 px-5 py-4 sm:px-6">
               <button
                 type="button"
